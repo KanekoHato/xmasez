@@ -7,6 +7,7 @@
  */
 include_once ('include/dbconnection.php');
 
+$ispaid = "Not Paid";
 $idname = "_ID_CARD";
 $shipname = "_SHIP";
 $vehname = "_VEH";
@@ -22,6 +23,7 @@ $team2 = $_POST['team2'];
 $team3 = $_POST['team3'];
 $team4 = $_POST['team4'];
 
+
 $idcom = $name_full . $idname; 
 $shipcom = $name_full . $shipname;
 $vehcom = $name_full . $vehname;
@@ -36,12 +38,12 @@ $drvimg = $_FILES['drivinglicense']['name'];
 
 
 
-$stmt = $dbh->prepare('INSERT INTO ezexpress (p_name,team_state,team_name,p_member_1,p_member_2,'
-        . 'p_member_3,p_member_4,category_id) VALUES(?,?,?,?,?,?,?,?)');
+$stmt = $dbh->prepare('INSERT INTO ezexpress (ispaid,p_name,team_state,team_name,p_member_1,p_member_2,'
+        . 'p_member_3,p_member_4,category_id) VALUES(?,?,?,?,?,?,?,?,?)');
 
-$stmt->execute([$name_full,$onteam,$teamname,$team1,$team2,$team3,$team4,$cat]);
+$stmt->execute([$ispaid,$name_full,$onteam,$teamname,$team1,$team2,$team3,$team4,$cat]);
 
-if (isset($idcard)){
+if (strlen($idcard) > 0){
         $ext = end(explode('.', $idcard)); // upload file ext
         $name = $idcom . '.' . $ext; // Rename image file name
         //var_dump($name);
@@ -51,7 +53,7 @@ if (isset($idcard)){
         move_uploaded_file($_FILES["idcardpicture"]["tmp_name"], $path);
 }
 
-if (isset($shipimg)){
+if (strlen($shipimg) > 0){
         $ext = end(explode('.', $shipimg)); 
         $name = $shipcom . '.' . $ext; // 
         //var_dump($name);
@@ -61,7 +63,8 @@ if (isset($shipimg)){
         move_uploaded_file($_FILES["shippicture"]["tmp_name"], $path);
 }
 
-if (isset($vehimg)){
+if (strlen($vehimg) > 0){
+        
         $ext = end(explode('.', $vehimg)); 
         $name = $vehcom . '.' . $ext; // 
         //var_dump($name);
@@ -71,7 +74,7 @@ if (isset($vehimg)){
         move_uploaded_file($_FILES["vehiclepicture"]["tmp_name"], $path);
 }
 
-if (isset($naviimg)){
+if (strlen($naviimg) > 0){
         $ext = end(explode('.', $naviimg));
         $name = $navcom . '.' . $ext; // 
         //var_dump($name);
@@ -81,7 +84,7 @@ if (isset($naviimg)){
         move_uploaded_file($_FILES["navigatoridpicture"]["tmp_name"], $path);
 }
 
-if (isset($drvimg)){
+if (strlen($drvimg) > 0){
         $ext = end(explode('.', $drvimg));  
         $name = $drvcom . '.' . $ext; //
         //var_dump($name);
