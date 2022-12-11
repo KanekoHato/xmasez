@@ -30,6 +30,29 @@ session_start();
             .hidden {
                 display: none;
             }
+            .collapsible {
+                background-color: #777;
+                color: white;
+                cursor: pointer;
+                padding: 18px;
+                width: 100%;
+                border: none;
+                text-align: left;
+                outline: none;
+                font-size: 15px;
+            }
+
+            .active, .collapsible:hover {
+                background-color: #555;
+            }
+
+            .content {
+                padding: 0 18px;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.2s ease-out;
+                background-color: #f1f1f1;
+            }
         </style>
 
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.13.1/datatables.min.css"/>
@@ -69,7 +92,6 @@ session_start();
             </div>
             
         </div>
-
                     <div class="row">
                         <div class="col-md-12">
                             <div id="accordion">
@@ -77,6 +99,8 @@ session_start();
                                 <div class="card mb-1">
                                     <div class="card-header">
                                         <h5 class="mb-0">
+                                        <button class="collapsible">Open Data</button>
+                                            <div class="content">
                                             <table id="viewmyregdata">
                                                 <thead>
                                                     <tr>
@@ -154,6 +178,7 @@ session_start();
                                     <?php }
                                     ?>
                                                         </table>
+                                                        </div>
                                                     </h5>
                                                 </div>
                                             </div>
@@ -305,6 +330,21 @@ session_start();
                 $(document).ready(function () {
                     $('#viewmyregdata').DataTable();
                 });
+
+                var coll = document.getElementsByClassName("collapsible");
+                var i;
+
+                for (i = 0; i < coll.length; i++) {
+                    coll[i].addEventListener("click", function() {
+                        this.classList.toggle("active");
+                        var content = this.nextElementSibling;
+                        if (content.style.maxHeight){
+                        content.style.maxHeight = null;
+                        } else {
+                        content.style.maxHeight = content.scrollHeight + "px";
+                        } 
+                    });
+                }
     </script> 
             
     </body>
