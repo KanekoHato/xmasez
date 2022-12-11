@@ -4,8 +4,9 @@ include ("include/dbconnection.php");
 
 $stmt = $stmtfind = $category_tl = null;
 
-$stmtfind = $dbh->prepare("SELECT ez.id,  ez.drive_lic_path, ez.veh_img_path, ez.navi_idcard_path, ez.ship_img_path, ez.id_img_path, ez.p_name, ez.team_name, ez.p_member_1, ez.p_member_2, ez.p_member_3, ez.p_member_4, ez.category_id, k.id as "
-    . "'VIEWALLREG' FROM ezexpress ez join category k on ez.category_id = k.id");
+$stmtfind = $dbh->prepare("SELECT ez.id, ez.drive_lic_path, ez.veh_img_path, ez.navi_idcard_path, ez.ship_img_path, " 
+. "ez.id_img_path, ez.p_name, ez.team_name, ez.p_member_1, ez.p_member_2, ez.p_member_3, ez.p_member_4, k.category "
+. "FROM ezexpress ez join category k on ez.category_id = k.id");
        
     $stmtfind->execute();
     
@@ -38,18 +39,6 @@ session_start();
                        
                         while ($row = $stmtfind->fetch()) 
                             {
-                                if ($row['category_id'] == 1){
-                                    $category_tl = 'Paint Ball';
-                                }elseif ($row['category_id'] == 2) {
-                                        $category_tl = 'Rally - Time Attack';
-                                }elseif ($row['category_id'] == 3) {
-                                        $category_tl = 'Rally - Laps';
-                                }elseif ($row['category_id'] == 4){
-                                        $category_tl = 'Fishing';
-                                }else {
-                                        $category_tl = 'No Data';
-                                }
-                            
                                     echo '
                                         <br></br>
                                         <div class="card mb-1">
@@ -73,7 +62,7 @@ session_start();
                                             </tr>
                                             <tr>
                                             <td>' . $row['p_name'] . '</td>
-                                            <td>' . $category_tl . '</td>
+                                            <td>' . $row['category'] . '</td>
                                             <td>' . $row['team_name'] . '</td>
                                             <td>' . $row['p_member_1'] . '</td>
                                             <td>' . $row['p_member_2'] . '</td>
