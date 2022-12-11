@@ -9,7 +9,7 @@ include_once ('include/dbconnection.php');
 
 
 $name_full = $_POST['ispaidfind'];
-$ispaid = "Yes";
+$ispaid = "Paid";
 
 $stmt = $dbh->prepare('UPDATE ezexpress SET ispaid=? WHERE p_name=?');
 $stmt->execute([$ispaid,$name_full]);

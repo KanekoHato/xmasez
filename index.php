@@ -10,7 +10,7 @@ if (isset($_GET['find'])) {
 
     $search = '%' . $_GET['find'] . '%';
     $search_like = $search;
-    $stmtfind = $dbh->prepare("SELECT ez.id, ez.drive_lic_path, ez.veh_img_path, ez.navi_idcard_path, ez.ship_img_path, "
+    $stmtfind = $dbh->prepare("SELECT ez.id, ez.drive_lic_path, ez.ispaid, ez.veh_img_path, ez.navi_idcard_path, ez.ship_img_path, "
         . "ez.id_img_path, ez.p_name, ez.team_name, ez.p_member_1, ez.p_member_2, ez.p_member_3, ez.p_member_4, k.category "
         . "FROM ezexpress ez join category k on ez.category_id = k.id WHERE (p_name LIKE ?)");
 
@@ -87,6 +87,7 @@ session_start();
                                                         <th>Member 2</th>
                                                         <th>Member 3</th>
                                                         <th>Member 4</th>
+                                                        <th>Paid Status</th>
                                                         <th>ID Card</th>
                                                         <th>Vehicle Image</th>
                                                         <th>Ship Image</th>
@@ -98,7 +99,16 @@ session_start();
                                 if (isset($_GET['find'])) {
                                     while ($row = $stmtfind->fetch()) {
 
-                                        $vehimgfull = $idimgfull = $shipimgfull = $drivelicimgfull = $navididimgfull = '';
+                                        $paidplayer = $vehimgfull = $idimgfull = $shipimgfull = $drivelicimgfull = $navididimgfull = '';
+                                        $ispaidinfo = $row['ispaid'];
+
+                                        if (isset($ispaidinfo)) {
+                                            $paidplayer = '
+                                            <div class="alert alert-primary" role="alert">
+                                                Registration Fee Is : ' . $row['ispaid'] . '
+                                                </div>
+                                            </div>';
+                                        }
 
                                         if ($row['veh_img_path'] > 0) {
                                             $vehimgfull = '<img width="100px" height="100px" src=images/' . $row['veh_img_path'] . '>';
@@ -127,6 +137,7 @@ session_start();
                                                         <td>' . $row['p_member_2'] . '</td>
                                                         <td>' . $row['p_member_3'] . '</td>
                                                         <td>' . $row['p_member_4'] . '</td>
+                                                        <td>'. $paidplayer .'</td>
                                                         <td><a href="images/' . $row['id_img_path'] . '" target="_blank">' . $idimgfull . '</a></td>
                                                         <td><a href="images/' . $row['veh_img_path'] . '" target="_blank">' . $vehimgfull . '</a></td>
                                                         <td><a href="images/' . $row['ship_img_path'] . '" target="_blank">' . $shipimgfull . '</a></td>

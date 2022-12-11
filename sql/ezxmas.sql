@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 11, 2022 at 11:22 AM
+-- Generation Time: Dec 11, 2022 at 06:23 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -66,7 +66,8 @@ CREATE TABLE `ezexpress` (
   `p_member_2` varchar(255) NOT NULL,
   `p_member_3` varchar(255) NOT NULL,
   `p_member_4` varchar(255) NOT NULL,
-  `category_id` int(35) NOT NULL
+  `category_id` int(35) NOT NULL,
+  `ispaid` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -100,7 +101,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `ezexpress`
 --
 ALTER TABLE `ezexpress`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- Constraints for dumped tables
