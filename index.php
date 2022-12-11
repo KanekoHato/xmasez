@@ -183,7 +183,6 @@ session_start();
                                     </div>
                                     <div>
                                         <select class="btn btn-primary" id="eventselect" name="event_select" class="form-select">
-                                            <option value="0" selected>Select Event Type</option>
                                             <?php
                                             $stmt = $dbh->query('SELECT * FROM category');
                                             while ($row = $stmt->fetch()) {
