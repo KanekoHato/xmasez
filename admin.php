@@ -36,17 +36,11 @@ session_start();
             <div class="row">
                 <div class="col-md-12">
                     <div id="accordion">
-                        <?php
-                       
-                       
-                        while ($row = $stmtfind->fetch()) 
-                            {
-                                    echo '
-                                    <br></br>
-                                    <div class="card mb-1">
-                                    <div class="card-header">
-                                        <h5 class="mb-0">
-                                        <table id="viewalldata">
+                    <br></br>
+                    <div class="card mb-1">
+                            <div class="card-header">
+                                <h5 class="mb-0">
+                                    <table id="viewalldata">
                                         <thead>
                                             <tr>
                                                 <th>Full Name</th>
@@ -62,7 +56,14 @@ session_start();
                                                 <th>Driving License</th>
                                                 <th>Navigator ID Card</th>
                                             </tr>
-                                        </thead>
+                                    </thead>
+                        <?php
+                       
+                       
+                        while ($row = $stmtfind->fetch()) 
+                            {
+                                    echo '
+                                    
                                         <tr>
                                             <td>' . $row['p_name'] . '</td>
                                             <td>' . $row['category'] . '</td>

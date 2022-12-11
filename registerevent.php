@@ -44,7 +44,7 @@ $stmt->execute([$name_full,$onteam,$teamname,$team1,$team2,$team3,$team4,$cat]);
 if (isset($idcard)){
         $ext = end(explode('.', $idcard)); // upload file ext
         $name = $idcom . '.' . $ext; // Rename image file name
-        var_dump($name);
+        //var_dump($name);
         $stmt = $dbh->prepare('UPDATE ezexpress SET id_img_path=? WHERE p_name=?');
         $stmt->execute([$name,$name_full]);
         $path = "images/". $name;
@@ -54,7 +54,7 @@ if (isset($idcard)){
 if (isset($shipimg)){
         $ext = end(explode('.', $shipimg)); 
         $name = $shipcom . '.' . $ext; // 
-        var_dump($name);
+        //var_dump($name);
         $stmt = $dbh->prepare('UPDATE ezexpress SET ship_img_path=? WHERE p_name=?');
         $stmt->execute([$name,$name_full]);
         $path = "images/". $name;
@@ -64,7 +64,7 @@ if (isset($shipimg)){
 if (isset($vehimg)){
         $ext = end(explode('.', $vehimg)); 
         $name = $vehcom . '.' . $ext; // 
-        var_dump($name);
+        //var_dump($name);
         $stmt = $dbh->prepare('UPDATE ezexpress SET veh_img_path=? WHERE p_name=?');
         $stmt->execute([$name,$name_full]);
         $path = "images/". $name;
@@ -74,7 +74,7 @@ if (isset($vehimg)){
 if (isset($naviimg)){
         $ext = end(explode('.', $naviimg));
         $name = $navcom . '.' . $ext; // 
-        var_dump($name);
+        //var_dump($name);
         $stmt = $dbh->prepare('UPDATE ezexpress SET navi_idcard_path=? WHERE p_name=?');
         $stmt->execute([$name,$name_full]);
         $path = "images/". $name;
@@ -84,12 +84,12 @@ if (isset($naviimg)){
 if (isset($drvimg)){
         $ext = end(explode('.', $drvimg));  
         $name = $drvcom . '.' . $ext; //
-        var_dump($name);
+        //var_dump($name);
         $stmt = $dbh->prepare('UPDATE ezexpress SET drive_lic_path=? WHERE p_name=?');
         $stmt->execute([$name,$name_full]);
         $path = "images/". $name;
         move_uploaded_file($_FILES["drivinglicense"]["tmp_name"], $path);
 }
-//echo "<script>location.href='index.php';</script>";
+echo "<script>location.href='index.php';</script>";
 
 ?>
