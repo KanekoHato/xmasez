@@ -10,9 +10,9 @@ if (isset($_GET['find'])) {
 
     $search = '%'.$_GET['find'].'%';
     $search_like = $search;
-    $stmtfind = $dbh->prepare("SELECT ez.id, ez.drive_lic_path, ez.veh_img_path, ez.navi_idcard_path, ez.ship_img_path, " 
-    . "ez.id_img_path, ez.p_name, ez.team_name, ez.p_member_1, ez.p_member_2, ez.p_member_3, ez.p_member_4, k.category "
-    . "FROM ezexpress ez join category k on ez.category_id = k.id WHERE (p_name LIKE ?)");
+        $stmtfind = $dbh->prepare("SELECT ez.id, ez.drive_lic_path, ez.veh_img_path, ez.navi_idcard_path, ez.ship_img_path, " 
+        . "ez.id_img_path, ez.p_name, ez.team_name, ez.p_member_1, ez.p_member_2, ez.p_member_3, ez.p_member_4, k.category "
+        . "FROM ezexpress ez join category k on ez.category_id = k.id WHERE (p_name LIKE ?)");
     
     $stmtfind->execute([$search_like]);
 }
@@ -25,12 +25,14 @@ session_start();
     <head>
         <title>EZ Express Event Register</title>
         <?php include_once('include/head.php'); ?>
-
+        
         <style>
             .hidden {
                 display: none;
             }
         </style>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.13.1/datatables.min.css"/>
+        <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.13.1/datatables.min.js"></script>
     </head>
 
     <body>
@@ -79,22 +81,23 @@ session_start();
                                         <div class="card mb-1">
                                         <div class="card-header">
                                             <h5 class="mb-0">
-                                            <table>
-                                            <tr>
-                                                <th>Full Name</th>
-                                                <th>Event Type</th>
-                                                <th>Team Name</th>
-                                                <th>Member 1 / Navigator</th>
-                                                <th>Member 2</th>
-                                                <th>Member 3</th>
-                                                <th>Member 4</th>
-
-                                                <th>ID Card</th>
-                                                <th>Vehicle Image</th>
-                                                <th>Ship Image</th>
-                                                <th>Driving License</th>
-                                                <th>Navigator ID Card</th>
-                                            </tr>
+                                            <table id="viewmyregdata">
+                                            <thead>
+                                                <tr>
+                                                    <th>Full Name</th>
+                                                    <th>Event Type</th>
+                                                    <th>Team Name</th>
+                                                    <th>Member 1</th>
+                                                    <th>Member 2</th>
+                                                    <th>Member 3</th>
+                                                    <th>Member 4</th>
+                                                    <th>ID Card</th>
+                                                    <th>Vehicle Image</th>
+                                                    <th>Ship Image</th>
+                                                    <th>Driving License</th>
+                                                    <th>Navigator ID Card</th>
+                                                </tr>
+                                            </thead>
                                             <tr>
                                                 <td>' . $row['p_name'] . '</td>
                                                 <td>' . $row['category'] . '</td>
@@ -264,6 +267,10 @@ session_start();
                     if(onteam.value === '1'){
                         team.classList.remove('hidden');
                     }
+                });
+
+                $(document).ready(function () {
+                    $('#viewmyregdata').DataTable();
                 });
     </script> 
             

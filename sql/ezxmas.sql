@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 11, 2022 at 01:59 AM
+-- Generation Time: Dec 11, 2022 at 11:22 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -68,13 +68,6 @@ CREATE TABLE `ezexpress` (
   `p_member_4` varchar(255) NOT NULL,
   `category_id` int(35) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `ezexpress`
---
-
-INSERT INTO `ezexpress` (`p_name`, `team_state`, `team_name`, `id`, `id_img_path`, `ship_img_path`, `navi_idcard_path`, `veh_img_path`, `drive_lic_path`, `p_member_1`, `p_member_2`, `p_member_3`, `p_member_4`, `category_id`) VALUES
-('Mitsuko_Amai', 1, 'UoM', 13, 'Mitsuko_Amai_ID_CARD.png', 'Mitsuko_Amai_SHIP.png', 'Mitsuko_Amai_NAV_ID.png', 'Mitsuko_Amai_VEH.png', 'Mitsuko_Amai_DRV_LIC.png', 'Ensley_Flameheart', '', '', '', 2);
 
 --
 -- Indexes for dumped tables

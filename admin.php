@@ -23,6 +23,8 @@ session_start();
                    display: none;
             }
         </style>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.13.1/datatables.min.css"/>
+        <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.13.1/datatables.min.js"></script>
     </head>
 
     <body>
@@ -40,27 +42,28 @@ session_start();
                         while ($row = $stmtfind->fetch()) 
                             {
                                     echo '
-                                        <br></br>
-                                        <div class="card mb-1">
-                                        <div class="card-header">
-                                            <h5 class="mb-0">
-                                            <table>
+                                    <br></br>
+                                    <div class="card mb-1">
+                                    <div class="card-header">
+                                        <h5 class="mb-0">
+                                        <table id="viewalldata">
+                                        <thead>
                                             <tr>
                                                 <th>Full Name</th>
                                                 <th>Event Type</th>
                                                 <th>Team Name</th>
-                                                <th>Member 1 / Navigator / Fish Helper</th>
+                                                <th>Member 1</th>
                                                 <th>Member 2</th>
                                                 <th>Member 3</th>
                                                 <th>Member 4</th>
-
                                                 <th>ID Card</th>
                                                 <th>Vehicle Image</th>
                                                 <th>Ship Image</th>
                                                 <th>Driving License</th>
                                                 <th>Navigator ID Card</th>
                                             </tr>
-                                            <tr>
+                                        </thead>
+                                        <tr>
                                             <td>' . $row['p_name'] . '</td>
                                             <td>' . $row['category'] . '</td>
                                             <td>' . $row['team_name'] . '</td>
@@ -73,15 +76,20 @@ session_start();
                                             <td><a href="images/'. $row['ship_img_path'] .'" target="_blank"><img width="100px" height="100px" src=images/' . $row['ship_img_path'] . '></a></td>
                                             <td><a href="images/'. $row['drive_lic_path'] .'" target="_blank"><img width="100px" height="100px" src=images/' . $row['drive_lic_path'] . '></a></td>
                                             <td><a href="images/'. $row['navi_idcard_path'] .'" target="_blank"><img width="100px" height="100px" src=images/' . $row['navi_idcard_path'] . '></a></td>
-                                            </tr>
-                                            </table>
-                                            </h5>
-                                        </div>
-                                    </div>';
+                                        </tr>
+                                        </table>
+                                        </h5>
+                                    </div>
+                                </div>';
                             }?>
                     </div>
                 </div>
             </div>
         </div>
+        <script>
+            $(document).ready(function () {
+                $('#viewalldata').DataTable();
+            });
+        </script>
     </body>
 </html> 
