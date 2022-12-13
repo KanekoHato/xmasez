@@ -6,6 +6,12 @@ if (isset($_ENV['DB_HOST'])) {
   define('DB_HOST','127.0.0.1');
 }
 
+if (isset($_ENV['DB_PORT'])) {
+  define('DB_PORT',$_ENV['DB_PORT']);
+} else {
+  define('DB_PORT','3306');
+}
+
 if (isset($_ENV['DB_USERNAME'])) {
   define('DB_USER',$_ENV['DB_USERNAME']);
 } else {

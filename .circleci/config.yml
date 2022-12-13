@@ -93,6 +93,7 @@ jobs:
               --name web-xmasez-dev \
               --network=mariadb-net \
               -e DB_HOST="mariadb.mariadb-net" \
+              -e DB_PORT="3307" \
               -e DB_USER="express" \
               -e DB_PASS="VzaVd98W5sfPXtmW" \
               -e DB_NAME="express_dev" \
@@ -149,6 +150,7 @@ jobs:
               --name web-xmasez-prod \
               --network=mariadb-net \
               -e DB_HOST="mariadb.mariadb-net" \
+              -e DB_PORT="3307" \
               -e DB_USER="express" \
               -e DB_PASS="VzaVd98W5sfPXtmW" \
               -e DB_NAME="express" \
