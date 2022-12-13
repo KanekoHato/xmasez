@@ -14,9 +14,6 @@ jobs:
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
-      - add_ssh_keys:
-          fingerprints:
-            - "ec:3b:b8:07:63:96:5d:cf:20:42:23:2e:b1:e0:43:60" # GitHub as ephorize-dev
       - checkout
       - run:
           name: Setup Environment Variables
@@ -41,7 +38,7 @@ jobs:
     steps:
       - add_ssh_keys:
           fingerprints:
-            - "04:db:61:9e:d9:b4:6f:63:88:db:4a:4a:80:0b:f0:3f" # Contabo (SG)
+            - "52:b6:7a:72:aa:72:84:ba:97:37:88:15:44:c4:be:e3" # Contabo (SG)
       - checkout
       - run:
           name: Setup Environment Variables
@@ -89,7 +86,7 @@ jobs:
     steps:
       - add_ssh_keys:
           fingerprints:
-            - "04:db:61:9e:d9:b4:6f:63:88:db:4a:4a:80:0b:f0:3f" # Contabo (SG)
+            - "52:b6:7a:72:aa:72:84:ba:97:37:88:15:44:c4:be:e3" # Contabo (SG)
       - checkout
       - run:
           name: Setup Environment Variables
