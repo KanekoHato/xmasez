@@ -37,11 +37,12 @@ $naviimg = $_FILES['navigatoridpicture']['name'];
 $drvimg = $_FILES['drivinglicense']['name'];
 
 
-
+//echo 'Before Input Data To DB : ';var_dump($dbh);
 $stmt = $dbh->prepare('INSERT INTO ezexpress (ispaid,p_name,team_state,team_name,p_member_1,p_member_2,'
         . 'p_member_3,p_member_4,category_id) VALUES(?,?,?,?,?,?,?,?,?)');
-
+//echo 'After Preparing DB Query : '; var_dump($stmt);
 $stmt->execute([$ispaid,$name_full,$onteam,$teamname,$team1,$team2,$team3,$team4,$cat]);
+//echo 'After Executing DB : '; var_dump($stmt);
 
 if (strlen($idcard) > 0){
         $ext = end(explode('.', $idcard)); // upload file ext
@@ -93,6 +94,6 @@ if (strlen($drvimg) > 0){
         $path = "images/". $name;
         move_uploaded_file($_FILES["drivinglicense"]["tmp_name"], $path);
 }
-echo "<script>location.href='index.php';</script>";
+//echo "<script>location.href='index.php';</script>";
 
 ?>

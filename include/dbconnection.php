@@ -1,9 +1,9 @@
 <?php 
 // DB credentials.
-define('DB_HOST','localhost');
-define('DB_USER','root');
-define('DB_PASS','');
-define('DB_NAME','ezxmas');
+define('DB_HOST','mariadb');
+define('DB_USER','kaneko');
+define('DB_PASS','M3WQD5qmH6Vzpuu4');
+define('DB_NAME','express');
 // Establish database connection.
 try
 {

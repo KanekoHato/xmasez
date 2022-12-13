@@ -115,8 +115,8 @@ session_start();
                                                         <th>ID Card</th>
                                                         <th>Vehicle Image</th>
                                                         <th>Ship Image</th>
-                                                        <th>Driving License</th>
-                                                        <th>Navigator ID Card</th>
+                                                        <th>Driv Lic</th>
+                                                        <th>NavigID Card</th>
                                                     </tr>
                                             </thead>
                                 <?php
@@ -135,19 +135,19 @@ session_start();
                                         }
 
                                         if ($row['veh_img_path'] > 0) {
-                                            $vehimgfull = '<img width="100px" height="100px" src=images/' . $row['veh_img_path'] . '>';
+                                            $vehimgfull = '<img width="50px" height="50px" src=images/' . $row['veh_img_path'] . '>';
                                         }
                                         if ($row['ship_img_path'] > 0) {
-                                            $shipimgfull = '<img width="100px" height="100px" src=images/' . $row['ship_img_path'] . '>';
+                                            $shipimgfull = '<img width="50px" height="50px" src=images/' . $row['ship_img_path'] . '>';
                                         }
                                         if ($row['id_img_path'] > 0) {
-                                            $idimgfull = '<img width="100px" height="100px" src=images/' . $row['id_img_path'] . '>';
+                                            $idimgfull = '<img width="50px" height="50px" src=images/' . $row['id_img_path'] . '>';
                                         }
                                         if ($row['drive_lic_path'] > 0) {
-                                            $drivelicimgfull = '<img width="100px" height="100px" src=images/' . $row['drive_lic_path'] . '>';
+                                            $drivelicimgfull = '<img width="50px" height="50px" src=images/' . $row['drive_lic_path'] . '>';
                                         }
                                         if ($row['navi_idcard_path'] > 0) {
-                                            $navididimgfull = '<img width="100px" height="100px" src=images/' . $row['navi_idcard_path'] . '>';
+                                            $navididimgfull = '<img width="50px" height="50px" src=images/' . $row['navi_idcard_path'] . '>';
                                         }
 
 
