@@ -92,6 +92,7 @@ jobs:
             docker --context remote_sg run -dit \
               --name web-xmasez-dev \
               --network=mariadb-net \
+              -v /var/www/xmasez-images-dev:/var/www/html/images \
               -e DB_HOST="mariadb.mariadb-net" \
               -e DB_PORT="3306" \
               -e DB_USERNAME="express" \
@@ -149,6 +150,7 @@ jobs:
             docker --context remote_sg run -dit \
               --name web-xmasez-prod \
               --network=mariadb-net \
+              -v /var/www/xmasez-images-prod:/var/www/html/images \
               -e DB_HOST="mariadb.mariadb-net" \
               -e DB_PORT="3306" \
               -e DB_USERNAME="express" \
