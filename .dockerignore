@@ -1,6 +1,11 @@
 .circleci/config.yml
+.circleci
+.dockerignore
+.git
+.gitattributes
+.gitignore
+
+Dockerfile
 nbproject/project.properties
 nbproject/project.xml
-sql/category.sql
-sql/ezexpress.sql
-Dockerfile
+sql/
