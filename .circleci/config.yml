@@ -21,13 +21,13 @@ jobs:
             echo 'export CIRCLE_SHA1_SHORT=`echo $CIRCLE_SHA1 | cut -c 1-8`' >> "$BASH_ENV"
       - run:
           name: "Build image"
-          command: "docker build -f dev.Dockerfile --tag $DOCKER_USERNAME/ephorize-xmasez:$CIRCLE_SHA1_SHORT ."
+          command: "docker build -f dev.Dockerfile --tag $DOCKER_USERNAME/ephorize-xmasez:$CIRCLE_SHA1_SHORT-dev ."
       - run:
           name: "Login to Canister"
           command: "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
       - run:
           name: "Push image to Canister"
-          command: "docker push $DOCKER_USERNAME/ephorize-xmasez:$CIRCLE_SHA1_SHORT"
+          command: "docker push $DOCKER_USERNAME/ephorize-xmasez:$CIRCLE_SHA1_SHORT-dev"
   build_prod:
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
@@ -43,13 +43,13 @@ jobs:
             echo 'export CIRCLE_SHA1_SHORT=`echo $CIRCLE_SHA1 | cut -c 1-8`' >> "$BASH_ENV"
       - run:
           name: "Build image"
-          command: "docker build -f prod.Dockerfile --tag $DOCKER_USERNAME/ephorize-xmasez:$CIRCLE_SHA1_SHORT ."
+          command: "docker build -f prod.Dockerfile --tag $DOCKER_USERNAME/ephorize-xmasez:$CIRCLE_SHA1_SHORT-prod ."
       - run:
           name: "Login to Canister"
           command: "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
       - run:
           name: "Push image to Canister"
-          command: "docker push $DOCKER_USERNAME/ephorize-xmasez:$CIRCLE_SHA1_SHORT"
+          command: "docker push $DOCKER_USERNAME/ephorize-xmasez:$CIRCLE_SHA1_SHORT-prod"
   deploy_sg_dev:
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
@@ -77,7 +77,7 @@ jobs:
       - run:
           name: "Pull new image"
           command: |
-            docker --context remote_sg pull $DOCKER_USERNAME/ephorize-xmasez:$CIRCLE_SHA1_SHORT
+            docker --context remote_sg pull $DOCKER_USERNAME/ephorize-xmasez:$CIRCLE_SHA1_SHORT-dev
       - run:
           name: "Stop existence container"
           command: |
@@ -91,12 +91,13 @@ jobs:
           command: |
             docker --context remote_sg run -dit \
               --name web-xmasez-dev \
+              --network=mariadb-net \
               -e DB_HOST="mariadb" \
               -e DB_USER="express" \
               -e DB_PASS="VzaVd98W5sfPXtmW" \
               -e DB_NAME="express_dev" \
               -p 127.0.0.1:4100:80 \
-              $DOCKER_USERNAME/ephorize-xmasez:$CIRCLE_SHA1_SHORT
+              $DOCKER_USERNAME/ephorize-xmasez:$CIRCLE_SHA1_SHORT-dev
       - run:
           name: "Logout"
           command: |
@@ -132,7 +133,7 @@ jobs:
       - run:
           name: "Pull new image"
           command: |
-            docker --context remote_sg pull $DOCKER_USERNAME/ephorize-xmasez:$CIRCLE_SHA1_SHORT
+            docker --context remote_sg pull $DOCKER_USERNAME/ephorize-xmasez:$CIRCLE_SHA1_SHORT-prod
       - run:
           name: "Stop existence container"
           command: |
@@ -146,12 +147,13 @@ jobs:
           command: |
             docker --context remote_sg run -dit \
               --name web-xmasez-prod \
+              --network=mariadb-net \
               -e DB_HOST="mariadb" \
               -e DB_USER="express" \
               -e DB_PASS="VzaVd98W5sfPXtmW" \
               -e DB_NAME="express" \
               -p 127.0.0.1:4101:80 \
-              $DOCKER_USERNAME/ephorize-xmasez:$CIRCLE_SHA1_SHORT
+              $DOCKER_USERNAME/ephorize-xmasez:$CIRCLE_SHA1_SHORT-prod
       - run:
           name: "Logout"
           command: |
