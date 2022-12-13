@@ -92,7 +92,7 @@ jobs:
             docker --context remote_sg run -dit \
               --name web-xmasez-dev \
               --network=mariadb-net \
-              -e DB_HOST="mariadb" \
+              -e DB_HOST="mariadb.mariadb-net" \
               -e DB_USER="express" \
               -e DB_PASS="VzaVd98W5sfPXtmW" \
               -e DB_NAME="express_dev" \
@@ -148,7 +148,7 @@ jobs:
             docker --context remote_sg run -dit \
               --name web-xmasez-prod \
               --network=mariadb-net \
-              -e DB_HOST="mariadb" \
+              -e DB_HOST="mariadb.mariadb-net" \
               -e DB_USER="express" \
               -e DB_PASS="VzaVd98W5sfPXtmW" \
               -e DB_NAME="express" \
