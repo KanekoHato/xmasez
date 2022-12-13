@@ -1,0 +1,158 @@
+# Use the latest 2.1 version of CircleCI pipeline process engine.
+# See: https://circleci.com/docs/2.0/configuration-reference
+version: 2.1
+orbs:
+  node: circleci/node@5.0.0
+# Define a job to be invoked later in a workflow.
+# See: https://circleci.com/docs/2.0/configuration-reference/#jobs
+jobs:
+  build_and_publish:
+    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
+    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
+    machine:
+      image: ubuntu-2004:2022.07.1
+    # Add steps to the job
+    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "ec:3b:b8:07:63:96:5d:cf:20:42:23:2e:b1:e0:43:60" # GitHub as ephorize-dev
+      - checkout
+      - run:
+          name: Setup Environment Variables
+          command: |
+            echo 'export CIRCLE_SHA1_SHORT=`echo $CIRCLE_SHA1 | cut -c 1-8`' >> "$BASH_ENV"
+      - run:
+          name: "Build image"
+          command: "docker build --tag $DOCKER_USERNAME/ephorize-xmasez:$CIRCLE_SHA1_SHORT ."
+      - run:
+          name: "Login to Canister"
+          command: "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
+      - run:
+          name: "Push image to Canister"
+          command: "docker push $DOCKER_USERNAME/ephorize-xmasez:$CIRCLE_SHA1_SHORT"
+  deploy_sg_dev:
+    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
+    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
+    machine:
+      image: ubuntu-2004:2022.07.1
+    # Add steps to the job
+    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "04:db:61:9e:d9:b4:6f:63:88:db:4a:4a:80:0b:f0:3f" # Contabo (SG)
+      - checkout
+      - run:
+          name: Setup Environment Variables
+          command: |
+            echo 'export CIRCLE_SHA1_SHORT=`echo $CIRCLE_SHA1 | cut -c 1-8`' >> "$BASH_ENV"
+      - run:
+          name: "Prepare Docker Context"
+          command: |
+            docker context create remote_sg --docker "host=ssh://deploy@server.ephorize.org"
+      - run:
+          name: "Login to Canister (on remote)"
+          command: |
+            docker --context remote_sg login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+      - run:
+          name: "Pull new image"
+          command: |
+            docker --context remote_sg pull $DOCKER_USERNAME/ephorize-xmasez:$CIRCLE_SHA1_SHORT
+      - run:
+          name: "Stop existence container"
+          command: |
+            docker --context stop web-xmasez-dev || true
+      - run:
+          name: "Remove container"
+          command: |
+            docker --context rm web-xmasez-dev || true
+      - run:
+          name: "Deploy"
+          command: |
+            docker --context remote_sg run -dit -e DB_HOST="mariadb" -e DB_USER="express" -e DB_PASS="VzaVd98W5sfPXtmW" -e DB_NAME="express_dev" -p 127.0.0.1:4100:80 $DOCKER_USERNAME/ephorize-xmasez:$CIRCLE_SHA1_SHORT
+      - run:
+          name: "Logout"
+          command: |
+            docker --context remote_sg logout
+      - run:
+          name: "Prune image"
+          command: |
+            docker --context remote_sg image prune -f
+  deploy_sg_prod:
+    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
+    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
+    machine:
+      image: ubuntu-2004:2022.07.1
+    # Add steps to the job
+    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "04:db:61:9e:d9:b4:6f:63:88:db:4a:4a:80:0b:f0:3f" # Contabo (SG)
+      - checkout
+      - run:
+          name: Setup Environment Variables
+          command: |
+            echo 'export CIRCLE_SHA1_SHORT=`echo $CIRCLE_SHA1 | cut -c 1-8`' >> "$BASH_ENV"
+      - run:
+          name: "Prepare Docker Context"
+          command: |
+            docker context create remote_sg --docker "host=ssh://deploy@server.ephorize.org"
+      - run:
+          name: "Login to Canister (on remote)"
+          command: |
+            docker --context remote_sg login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+      - run:
+          name: "Pull new image"
+          command: |
+            docker --context remote_sg pull $DOCKER_USERNAME/ephorize-xmasez:$CIRCLE_SHA1_SHORT
+      - run:
+          name: "Stop existence container"
+          command: |
+            docker --context stop web-xmasez-prod || true
+      - run:
+          name: "Remove container"
+          command: |
+            docker --context rm web-xmasez-prod || true
+      - run:
+          name: "Deploy"
+          command: |
+            docker --context remote_sg run -dit -e DB_HOST="mariadb" -e DB_USER="express" -e DB_PASS="VzaVd98W5sfPXtmW" -e DB_NAME="express" -p 127.0.0.1:4101:80 $DOCKER_USERNAME/ephorize-xmasez:$CIRCLE_SHA1_SHORT
+      - run:
+          name: "Logout"
+          command: |
+            docker --context remote_sg logout
+      - run:
+          name: "Prune image"
+          command: |
+            docker --context remote_sg image prune -f
+# Invoke jobs via workflows
+# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
+workflows:
+  build-workflow:
+    jobs:
+      - build_and_publish:
+          context:
+            - container_image_registry
+          filters:
+            branches:
+              only:
+                - main
+                - development
+      - deploy_sg_dev:
+          context:
+            - container_image_registry
+          requires:
+            - build_and_publish
+          filters:
+            branches:
+              only: development
+      - deploy_sg_prod:
+          context:
+            - container_image_registry
+          requires:
+            - build_and_publish
+          filters:
+            branches:
+              only: main
