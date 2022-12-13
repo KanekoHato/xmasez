@@ -50,7 +50,7 @@ if (strlen($idcard) > 0){
         //var_dump($name);
         $stmt = $dbh->prepare('UPDATE ezexpress SET id_img_path=? WHERE p_name=?');
         $stmt->execute([$name,$name_full]);
-        $path = "images/". $name;
+        $path = $_SERVER['DOCUMENT_ROOT']."/images/". $name;
         move_uploaded_file($_FILES["idcardpicture"]["tmp_name"], $path);
 }
 
@@ -60,7 +60,7 @@ if (strlen($shipimg) > 0){
         //var_dump($name);
         $stmt = $dbh->prepare('UPDATE ezexpress SET ship_img_path=? WHERE p_name=?');
         $stmt->execute([$name,$name_full]);
-        $path = "images/". $name;
+        $path = $_SERVER['DOCUMENT_ROOT']."/images/". $name;
         move_uploaded_file($_FILES["shippicture"]["tmp_name"], $path);
 }
 
@@ -71,7 +71,7 @@ if (strlen($vehimg) > 0){
         //var_dump($name);
         $stmt = $dbh->prepare('UPDATE ezexpress SET veh_img_path=? WHERE p_name=?');
         $stmt->execute([$name,$name_full]);
-        $path = "images/". $name;
+        $path = $_SERVER['DOCUMENT_ROOT']."/images/". $name;
         move_uploaded_file($_FILES["vehiclepicture"]["tmp_name"], $path);
 }
 
@@ -81,7 +81,7 @@ if (strlen($naviimg) > 0){
         //var_dump($name);
         $stmt = $dbh->prepare('UPDATE ezexpress SET navi_idcard_path=? WHERE p_name=?');
         $stmt->execute([$name,$name_full]);
-        $path = "images/". $name;
+        $path = $_SERVER['DOCUMENT_ROOT']."/images/". $name;
         move_uploaded_file($_FILES["navigatoridpicture"]["tmp_name"], $path);
 }
 
@@ -91,7 +91,7 @@ if (strlen($drvimg) > 0){
         //var_dump($name);
         $stmt = $dbh->prepare('UPDATE ezexpress SET drive_lic_path=? WHERE p_name=?');
         $stmt->execute([$name,$name_full]);
-        $path = "images/". $name;
+        $path = $_SERVER['DOCUMENT_ROOT']."/images/". $name;
         move_uploaded_file($_FILES["drivinglicense"]["tmp_name"], $path);
 }
 //echo "<script>location.href='index.php';</script>";
