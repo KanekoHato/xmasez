@@ -1,6 +1,6 @@
 <?php
 
-include ("include/dbconnection.php");
+include ($_SERVER['DOCUMENT_ROOT']."/include/dbconnection.php");
 
 $stmt = $stmtfind = $category_tl = null;
 
@@ -17,10 +17,10 @@ session_start();
 
     <head>
         <title>EZ Express Event Register</title>
-        <?php include_once('include/head.php'); ?>
+        <?php include_once($_SERVER['DOCUMENT_ROOT'].'/include/head.php'); ?>
         <style>
             div.hidden{
-                   display: none;
+                display: none;
             }
         </style>
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.13.1/datatables.min.css"/>
@@ -29,7 +29,7 @@ session_start();
 
     <body>
 
-        <?php include_once('include/navbar.php'); ?>
+        <?php include_once($_SERVER['DOCUMENT_ROOT'].'/include/navbar.php'); ?>
             
         </div>
 
@@ -61,8 +61,7 @@ session_start();
                                         </thead>
                                         <tbody>
                         <?php
-                       
-                       
+
                         while ($row = $stmtfind->fetch()) 
                             {
                                 $vehimgfull = $idimgfull = $shipimgfull = $drivelicimgfull = $navididimgfull = '';

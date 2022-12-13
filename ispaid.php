@@ -5,7 +5,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-include_once ('include/dbconnection.php');
+include_once ($_SERVER['DOCUMENT_ROOT'].'/include/dbconnection.php');
 
 
 $name_full = $_POST['ispaidfind'];

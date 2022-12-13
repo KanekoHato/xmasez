@@ -1,6 +1,6 @@
 <?php
 
-include("include/dbconnection.php");
+include($_SERVER['DOCUMENT_ROOT']."/include/dbconnection.php");
 
 
 $stmt = $stmtfind = null;
@@ -24,7 +24,7 @@ session_start();
 
     <head>
         <title>EZ Express Event Register</title>
-        <?php include_once('include/head.php'); ?>
+        <?php include_once($_SERVER['DOCUMENT_ROOT'].'/include/head.php'); ?>
         
         <style>
             .hidden {
@@ -62,7 +62,7 @@ session_start();
     <body>
     
 
-        <?php include_once('include/navbar.php'); ?>
+        <?php include_once($_SERVER['DOCUMENT_ROOT'].'/include/navbar.php'); ?>
 
         <div class="container pt-5">
             <div class="row mb-3">
