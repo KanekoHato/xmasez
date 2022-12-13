@@ -78,7 +78,7 @@ jobs:
       - run:
           name: "Prune image"
           command: |
-            docker --context remote_sg image prune -f
+            docker --context remote_sg image prune -f || true
   deploy_sg_prod:
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
@@ -126,7 +126,7 @@ jobs:
       - run:
           name: "Prune image"
           command: |
-            docker --context remote_sg image prune -f
+            docker --context remote_sg image prune -f || true
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
