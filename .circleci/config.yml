@@ -59,15 +59,22 @@ jobs:
       - run:
           name: "Stop existence container"
           command: |
-            docker --context stop web-xmasez-dev || true
+            docker --context remote_sg stop web-xmasez-dev || true
       - run:
           name: "Remove container"
           command: |
-            docker --context rm web-xmasez-dev || true
+            docker --context remote_sg rm web-xmasez-dev || true
       - run:
           name: "Deploy"
           command: |
-            docker --context remote_sg run -dit -e DB_HOST="mariadb" -e DB_USER="express" -e DB_PASS="VzaVd98W5sfPXtmW" -e DB_NAME="express_dev" -p 127.0.0.1:4100:80 $DOCKER_USERNAME/ephorize-xmasez:$CIRCLE_SHA1_SHORT
+            docker --context remote_sg run -dit \
+              --name web-xmasez-dev \
+              -e DB_HOST="mariadb" \
+              -e DB_USER="express" \
+              -e DB_PASS="VzaVd98W5sfPXtmW" \
+              -e DB_NAME="express_dev" \
+              -p 127.0.0.1:4100:80 \
+              $DOCKER_USERNAME/ephorize-xmasez:$CIRCLE_SHA1_SHORT
       - run:
           name: "Logout"
           command: |
@@ -107,15 +114,22 @@ jobs:
       - run:
           name: "Stop existence container"
           command: |
-            docker --context stop web-xmasez-prod || true
+            docker --context remote_sg stop web-xmasez-prod || true
       - run:
           name: "Remove container"
           command: |
-            docker --context rm web-xmasez-prod || true
+            docker --context remote_sg rm web-xmasez-prod || true
       - run:
           name: "Deploy"
           command: |
-            docker --context remote_sg run -dit -e DB_HOST="mariadb" -e DB_USER="express" -e DB_PASS="VzaVd98W5sfPXtmW" -e DB_NAME="express" -p 127.0.0.1:4101:80 $DOCKER_USERNAME/ephorize-xmasez:$CIRCLE_SHA1_SHORT
+            docker --context remote_sg run -dit \
+              --name web-xmasez-prod \
+              -e DB_HOST="mariadb" \
+              -e DB_USER="express" \
+              -e DB_PASS="VzaVd98W5sfPXtmW" \
+              -e DB_NAME="express" \
+              -p 127.0.0.1:4101:80 \
+              $DOCKER_USERNAME/ephorize-xmasez:$CIRCLE_SHA1_SHORT
       - run:
           name: "Logout"
           command: |
