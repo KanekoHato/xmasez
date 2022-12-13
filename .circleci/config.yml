@@ -95,7 +95,7 @@ jobs:
               -e DB_HOST="mariadb.mariadb-net" \
               -e DB_PORT="3306" \
               -e DB_USERNAME="express" \
-              -e DB_PASS="VzaVd98W5sfPXtmW" \
+              -e DB_PASSWORD="VzaVd98W5sfPXtmW" \
               -e DB_NAME="express_dev" \
               -p 127.0.0.1:4100:80 \
               $DOCKER_USERNAME/ephorize-xmasez:$CIRCLE_SHA1_SHORT-dev
@@ -152,7 +152,7 @@ jobs:
               -e DB_HOST="mariadb.mariadb-net" \
               -e DB_PORT="3306" \
               -e DB_USERNAME="express" \
-              -e DB_PASS="VzaVd98W5sfPXtmW" \
+              -e DB_PASSWORD="VzaVd98W5sfPXtmW" \
               -e DB_NAME="express" \
               -p 127.0.0.1:4101:80 \
               $DOCKER_USERNAME/ephorize-xmasez:$CIRCLE_SHA1_SHORT-prod
