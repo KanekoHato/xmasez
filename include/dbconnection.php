@@ -1,25 +1,25 @@
 <?php 
 // DB credentials.
-if (isset($_ENV[DB_HOST])) {
-  define('DB_HOST',$_ENV[DB_HOST]);
+if (isset($_ENV['DB_HOST'])) {
+  define('DB_HOST',$_ENV['DB_HOST']);
 } else {
   define('DB_HOST','127.0.0.1');
 }
 
-if (isset($_ENV[DB_USERNAME])) {
-  define('DB_USER',$_ENV[DB_USERNAME]);
+if (isset($_ENV['DB_USERNAME'])) {
+  define('DB_USER',$_ENV['DB_USERNAME']);
 } else {
   define('DB_USER','kaneko');
 }
 
-if (isset($_ENV[DB_PASSWORD])) {
-  define('DB_PASS',$_ENV[DB_PASSWORD]);
+if (isset($_ENV['DB_PASSWORD'])) {
+  define('DB_PASS',$_ENV['DB_PASSWORD']);
 } else {
   define('DB_PASS','M3WQD5qmH6Vzpuu4');
 }
 
-if (isset($_ENV[DB_NAME])) {
-  define('DB_NAME',$_ENV[DB_NAME]);
+if (isset($_ENV['DB_NAME'])) {
+  define('DB_NAME',$_ENV['DB_NAME']);
 } else {
   define('DB_NAME','express');
 }
