@@ -1,0 +1,4 @@
+- Add input validation on register event
+- CSRF on register event
+- Add .htpasswd for admin
+- Add max file size on register event (?)
