@@ -5,7 +5,7 @@
 .gitattributes
 .gitignore
 
-Dockerfile
+*.Dockerfile
 nbproject/project.properties
 nbproject/project.xml
 sql/
