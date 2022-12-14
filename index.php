@@ -1,5 +1,9 @@
 <?php
-$onserver = 1;
+function generate_csrf() {
+    return md5(uniqid(mt_rand(), true));
+}
+
+$onserver = getenv('SERVER_MODE') == TRUE ? 1 : 0;
 if ($onserver == 1){
     include($_SERVER['DOCUMENT_ROOT'].'/include/dbconnection.php');
 } 
@@ -25,7 +29,9 @@ if (isset($_GET['find'])) {
 }
 
 session_start();
-$response = $_SESSION['error']['message'];
+$error = count($_SESSION) == 0 ? array() : $_SESSION['error'];
+$csrf_token = generate_csrf();
+$_SESSION['csrf_token'] = $csrf_token;
 
 ?>
 <!DOCTYPE html>
@@ -92,27 +98,20 @@ $response = $_SESSION['error']['message'];
         
         ?>
 
-        
-        <div class="response 
-            ">
-            
-        </div>
-
-        <?php if(!empty($response)) {
-            if (isset($_SESSION['error']['message'])) {
+        <?php
+            if(!empty($error)) {
         ?>
         <div class="toast" data-autohide="false">
         <div class="toast-header">
-            <strong class="mr-auto text-primary"><?php echo $response['type']; ?></strong>
-            <small class="text-muted">Theres an <?php echo $response['type']; ?></small>
+            <strong class="mr-auto text-primary"><?php echo $error['type']; ?></strong>
+            <small class="text-muted">Theres an <?php echo $error['type']; ?></small>
             <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">&times;</button>
         </div>
             <div class="toast-body">
-                <?php echo $response['message']; ?>
+                <?php echo $error['message']; ?>
             </div>
         </div>
-        <?php }
-            }?>
+        <?php } ?>
 
         <div class="container pt-5">
             <div class="row mb-3">
@@ -248,6 +247,7 @@ $response = $_SESSION['error']['message'];
                             </button>
                         </div>
                         <form action="registerevent.php" method="POST" enctype="multipart/form-data">
+                            <input type="hidden" name="_csrf" value="<?= $csrf_token ?>" />
                             <div class="modal-body">
 
                                 <div class="form-group">
@@ -394,8 +394,12 @@ $response = $_SESSION['error']['message'];
                         } 
                     });
                 }
-    </script> 
-    <?php session_destroy(); ?>
-            
+        </script> 
+        <script>
+            $(document).ready(function(){
+                $('.toast').toast('show');
+            });
+        </script>
+    <?php $_SESSION['error'] = null; ?>
     </body>
 </html> 
