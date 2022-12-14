@@ -1,6 +1,13 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT']."/include/dbconnection.php");
+$onserver = 1;
+if ($onserver == 1){
+    include($_SERVER['DOCUMENT_ROOT'].'/include/dbconnection.php');
+} 
+else 
+{
+    include('./include/dbconnection.php');
+}
 
 $stmt = $stmtfind = $category_tl = null;
 
@@ -17,7 +24,15 @@ session_start();
 
     <head>
         <title>EZ Express Event Register</title>
-        <?php include_once($_SERVER['DOCUMENT_ROOT'].'/include/head.php'); ?>
+        <?php         
+        if ($onserver == 1){
+            include_once($_SERVER['DOCUMENT_ROOT'].'/include/head.php');
+        } 
+        else 
+        {
+            include_once('./include/head.php');
+        } ?>
+
         <style>
             div.hidden{
                 display: none;
@@ -29,7 +44,16 @@ session_start();
 
     <body>
 
-        <?php include_once($_SERVER['DOCUMENT_ROOT'].'/include/navbar.php'); ?>
+        <?php 
+        if ($onserver == 1) 
+        {
+            include_once($_SERVER['DOCUMENT_ROOT'].'/include/navbar.php'); 
+        }
+        else
+        {
+            include_once('./include/navbar.php');
+        }
+        ?>
             
         </div>
 

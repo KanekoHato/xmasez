@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 12, 2022 at 03:39 PM
+-- Generation Time: Dec 14, 2022 at 06:27 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ezxmas`
+-- Database: `express`
 --
 
 -- --------------------------------------------------------
@@ -31,17 +31,17 @@ DROP TABLE IF EXISTS `ezexpress`;
 CREATE TABLE `ezexpress` (
   `p_name` varchar(35) NOT NULL,
   `team_state` int(11) NOT NULL,
-  `team_name` varchar(35) NOT NULL,
+  `team_name` varchar(35) DEFAULT NULL,
   `id` int(11) NOT NULL,
-  `id_img_path` varchar(255) NOT NULL,
-  `ship_img_path` varchar(255) NOT NULL,
-  `navi_idcard_path` varchar(255) NOT NULL,
-  `veh_img_path` varchar(255) NOT NULL,
-  `drive_lic_path` varchar(255) NOT NULL,
-  `p_member_1` varchar(255) NOT NULL,
-  `p_member_2` varchar(255) NOT NULL,
-  `p_member_3` varchar(255) NOT NULL,
-  `p_member_4` varchar(255) NOT NULL,
+  `id_img_path` varchar(255) DEFAULT NULL,
+  `ship_img_path` varchar(255) DEFAULT NULL,
+  `navi_idcard_path` varchar(255) DEFAULT NULL,
+  `veh_img_path` varchar(255) DEFAULT NULL,
+  `drive_lic_path` varchar(255) DEFAULT NULL,
+  `p_member_1` varchar(255) DEFAULT NULL,
+  `p_member_2` varchar(255) DEFAULT NULL,
+  `p_member_3` varchar(255) DEFAULT NULL,
+  `p_member_4` varchar(255) DEFAULT NULL,
   `category_id` int(35) NOT NULL,
   `ispaid` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -65,7 +65,7 @@ ALTER TABLE `ezexpress`
 -- AUTO_INCREMENT for table `ezexpress`
 --
 ALTER TABLE `ezexpress`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- Constraints for dumped tables

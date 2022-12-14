@@ -1,6 +1,13 @@
 <?php
+$onserver = 1;
+if ($onserver == 1){
+    include($_SERVER['DOCUMENT_ROOT'].'/include/dbconnection.php');
+} 
+else 
+{
+    include('./include/dbconnection.php');
+}
 
-include($_SERVER['DOCUMENT_ROOT']."/include/dbconnection.php");
 
 
 $stmt = $stmtfind = null;
@@ -24,7 +31,15 @@ session_start();
 
     <head>
         <title>EZ Express Event Register</title>
-        <?php include_once($_SERVER['DOCUMENT_ROOT'].'/include/head.php'); ?>
+        <?php 
+        if ($onserver == 1){
+            include_once($_SERVER['DOCUMENT_ROOT'].'/include/head.php');
+        } 
+        else 
+        {
+            include_once('./include/head.php');
+        }
+        ?>
         
         <style>
             .hidden {
@@ -62,7 +77,37 @@ session_start();
     <body>
     
 
-        <?php include_once($_SERVER['DOCUMENT_ROOT'].'/include/navbar.php'); ?>
+        <?php
+
+        if ($onserver == 1) 
+        {
+            include_once($_SERVER['DOCUMENT_ROOT'].'/include/navbar.php'); 
+        }
+        else
+        {
+            include_once('./include/navbar.php');
+        }
+        
+        ?>
+
+        
+        <div class="response 
+            ">
+            
+        </div>
+
+        <?php if(!empty($response)) { ?>
+        <div class="toast" data-autohide="false">
+        <div class="toast-header">
+            <strong class="mr-auto text-primary"><?php echo $response["type"]; ?></strong>
+            <small class="text-muted">Theres an <?php echo $response["type"]; ?></small>
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">&times;</button>
+        </div>
+            <div class="toast-body">
+                <?php echo $response["message"]; ?>
+            </div>
+        </div>
+        <?php }?>
 
         <div class="container pt-5">
             <div class="row mb-3">
@@ -70,7 +115,7 @@ session_start();
                     <form action="index.php" method="GET">
                         <div class="input-group">
                             <label for="find"></label>
-                            <input type="text" name="find" placeholder="Party Leader / Your Name Ex:(Mitsuko_Amai)" class="form-control">
+                            <input type="text" name="find" placeholder="Party Leader / Your Name Ex:(Mitsuko_Amai)" class="form-control" size="20" required autofocus>
                             <button type="submit" class="btn btn-primary">Find</button>
 
 
@@ -203,8 +248,7 @@ session_start();
                                 <div class="form-group">
                                     <div>
                                         <label for="fullname">Full Name / Party Leader Name</label>
-                                        <input type="text" placeholder="Mitsuko_Amai" name="fullname" class="form-control">
-                                        <span class="help-block">Enter Your Full Name With _.</span>
+                                        <input type="text" placeholder="Kaneko Hato" name="fullname" class="form-control" required autofocus>
                                     </div>
                                     <div>
                                         <select class="btn btn-primary" id="eventselect" name="event_select" class="form-select">
@@ -236,7 +280,7 @@ session_start();
                                     
                                             <div id="showteam" class="hidden">
                                                 <label for="teamname">Team Name</label>
-                                                <input placeholder="Ephorize Express" type="text" name="teamname" class="form-control">
+                                                <input placeholder="EZ Express" type="text" name="teamname" class="form-control">
 
                                                 
                                                     <label for="team1">Team Member 1 / Navigator / Fish Helper</label>
@@ -272,7 +316,7 @@ session_start();
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                <button type="submit" class="btn btn-primary">Sent</button>
+                                <button type="submit" name="submit" value="Upload" class="btn btn-primary">Sent</button>
                             </div>
                         </form>   
                     </div>

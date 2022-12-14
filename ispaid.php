@@ -5,8 +5,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-include_once ($_SERVER['DOCUMENT_ROOT'].'/include/dbconnection.php');
 
+ $onserver = 1;
+ if ($onserver == 1){
+     include($_SERVER['DOCUMENT_ROOT'].'/include/dbconnection.php');
+ } 
+ else 
+ {
+     include('./include/dbconnection.php');
+ }
 
 $name_full = $_POST['ispaidfind'];
 $ispaid = "Paid";
