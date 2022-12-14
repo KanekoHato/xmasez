@@ -5,6 +5,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+ function split_name($name) {
+        $name = trim($name);
+        $last_name = (strpos($name, ' ') === false) ? '' : preg_replace('#.*\s([\w-]*)$#', '$1', $name);
+        $first_name = trim( preg_replace('#'.preg_quote($last_name,'#').'#', '', $name ) );
+        return array($first_name, $last_name);
+    }
+
 $onserver = 1;
 
 if ($onserver == 1){
@@ -38,15 +46,13 @@ $team2 = $_POST['team2'];
 $team3 = $_POST['team3'];
 $team4 = $_POST['team4'];
 
-if (strpos($name_full, $chkundscr) !== false) {
-        $parts = explode(" ", $name_full);
-        $lastname = array_pop($parts);
-        $firstname = implode(" ", $parts);
-        $name_full = $firstname . $chkundscr . $lastname;
+if (str_contains($name_full, $chkundscr)) {
+        $name_full = $_POST['fullname'];
  } 
  else 
  {
-        $name_full = $_POST['fullname'];
+        split_name($name_full);
+        $name_full = $first_name . $chkundscr . $last_name;     
  }
 
 $idcom = $name_full . $idname; 

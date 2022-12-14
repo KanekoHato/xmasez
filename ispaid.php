@@ -18,7 +18,7 @@
 $name_full = $_POST['ispaidfind'];
 $ispaid = "Paid";
 
-$stmt = $dbh->prepare('UPDATE ezexpress SET ispaid=? WHERE p_name=?');
+$stmt = $dbh->prepare('UPDATE ezexpress SET ispaid=? WHERE id=?');
 $stmt->execute([$ispaid,$name_full]);
 
 echo "<script>location.href='admin.php';</script>";
