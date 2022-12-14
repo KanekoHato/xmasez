@@ -104,7 +104,10 @@ if (isset($_POST["submit"]) && strlen($idcard) > 0){
                                 "message" => "File ".$name." has been uploaded."
                         );
                 }else if($idcardsize > 2000000){
-                        
+                        $response = array(
+                                "type" => "danger",
+                                "message" => "Failed to upload ".$name. " files larger than 2MB."
+                        );
                 } else {
                         $response = array(
                                 "type" => "danger",
@@ -149,7 +152,10 @@ if (isset($_POST["submit"]) && strlen($shipimg) > 0){
                                 "message" => "File ".$name." has been uploaded."
                         );
                 }else if($shipimgsize > 2000000){
-                        
+                        $response = array(
+                                "type" => "danger",
+                                "message" => "Failed to upload ".$name. " files larger than 2MB."
+                        );
                 } else {
                         $response = array(
                                 "type" => "danger",
@@ -195,7 +201,10 @@ if (isset($_POST["submit"]) && strlen($vehimg) > 0){
                                 "message" => "File ".$name." has been uploaded."
                         );
                 }else if($vehimgsize > 2000000){
-                        
+                        $response = array(
+                                "type" => "danger",
+                                "message" => "Failed to upload ".$name. " files larger than 2MB."
+                        );
                 } else {
                         $response = array(
                                 "type" => "danger",
@@ -240,7 +249,10 @@ if (isset($_POST["submit"]) && strlen($naviimg) > 0){
                                 "message" => "File ".$name." has been uploaded."
                         );
                 }else if($naviimgsize > 2000000){
-                        
+                        $response = array(
+                                "type" => "danger",
+                                "message" => "Failed to upload ".$name. " files larger than 2MB."
+                        );
                 } else {
                         $response = array(
                                 "type" => "danger",
@@ -285,7 +297,10 @@ if (isset($_POST["submit"]) && strlen($drvimg) > 0){
                                 "message" => "File ".$name." has been uploaded."
                         );
                 }else if($drvimgsize > 2000000){
-                        
+                        $response = array(
+                                "type" => "danger",
+                                "message" => "Failed to upload ".$name. " files larger than 2MB."
+                        );
                 } else {
                         $response = array(
                                 "type" => "danger",
