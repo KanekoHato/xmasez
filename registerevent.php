@@ -300,8 +300,9 @@ if (isset($_POST["submit"]) && strlen($drvimg) > 0){
         );
     }
 
-    $_SESSION['error'] = $response;
-    //echo "<script>location.href='index.php';</script>";
+    $_SESSION['error'] = $response['type'];
+    $_SESSION['message'] = $response['message'];
+    echo "<script>location.href='index.php';</script>";
 
 
 ?>
