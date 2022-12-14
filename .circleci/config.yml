@@ -93,7 +93,6 @@ jobs:
               --name web-xmasez-dev \
               --network=mariadb-net \
               -v /var/www/xmasez-images-dev:/var/www/html/images \
-              -e APACHE_ARGUMENTS="-DDockerMode" \
               -e SERVER_MODE="1" \
               -e DB_HOST="mariadb.mariadb-net" \
               -e DB_PORT="3306" \
@@ -101,7 +100,7 @@ jobs:
               -e DB_PASSWORD="VzaVd98W5sfPXtmW" \
               -e DB_NAME="express_dev" \
               -p 127.0.0.1:4100:80 \
-              $DOCKER_USERNAME/ephorize-xmasez:$CIRCLE_SHA1_SHORT-dev
+              $DOCKER_USERNAME/ephorize-xmasez:$CIRCLE_SHA1_SHORT-dev -D DockerMode
       - run:
           name: "Logout"
           command: |
@@ -153,7 +152,6 @@ jobs:
               --name web-xmasez-prod \
               --network=mariadb-net \
               -v /var/www/xmasez-images-prod:/var/www/html/images \
-              -e APACHE_ARGUMENTS="-DDockerMode" \
               -e SERVER_MODE="1" \
               -e DB_HOST="mariadb.mariadb-net" \
               -e DB_PORT="3306" \
@@ -161,7 +159,7 @@ jobs:
               -e DB_PASSWORD="VzaVd98W5sfPXtmW" \
               -e DB_NAME="express" \
               -p 127.0.0.1:4101:80 \
-              $DOCKER_USERNAME/ephorize-xmasez:$CIRCLE_SHA1_SHORT-prod
+              $DOCKER_USERNAME/ephorize-xmasez:$CIRCLE_SHA1_SHORT-prod -D DockerMode
       - run:
           name: "Logout"
           command: |
