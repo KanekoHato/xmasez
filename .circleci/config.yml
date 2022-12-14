@@ -93,6 +93,7 @@ jobs:
               --name web-xmasez-dev \
               --network=mariadb-net \
               -v /var/www/xmasez-images-dev:/var/www/html/images \
+              -e APACHE_ARGUMENTS="-DDockerMode" \
               -e SERVER_MODE="1" \
               -e DB_HOST="mariadb.mariadb-net" \
               -e DB_PORT="3306" \
@@ -152,6 +153,7 @@ jobs:
               --name web-xmasez-prod \
               --network=mariadb-net \
               -v /var/www/xmasez-images-prod:/var/www/html/images \
+              -e APACHE_ARGUMENTS="-DDockerMode" \
               -e SERVER_MODE="1" \
               -e DB_HOST="mariadb.mariadb-net" \
               -e DB_PORT="3306" \
