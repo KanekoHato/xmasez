@@ -123,7 +123,7 @@ session_start();
                                                     <td><a href="images/'. $row['navi_idcard_path'] .'" target="_blank">' . $navididimgfull . '</a></td>
                                                     <td>
                                                         <form action="ispaid.php" method="POST">
-                                                            <button name="ispaidfind" class="btn btn-primary" type="submit" value="' . $row['p_name'] . '">PAID</button>
+                                                            <button name="ispaidfind" class="btn btn-primary" type="submit" value="' . $row['id'] . '">PAID</button>
                                                         </form>
                                                 </td>
                                                 </tr>
