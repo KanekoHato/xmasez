@@ -44,9 +44,9 @@ if ($onserver == 1) {
 $chkundscr = "_";
 $ispaid = "Not Paid";
 $idname = "_ID_CARD";
-$shipname = "_SHIP";
-$vehname = "_VEH";
-$naviname = "_NAV_ID";
+// $shipname = "_SHIP";
+// $vehname = "_VEH";
+// $naviname = "_NAV_ID";
 $drvname = "_DRV_LIC";
 $serverdiir = "/images/";
 $localdir = "images/";
@@ -59,7 +59,28 @@ $cat = (int) $_POST['event_select'];
 $team1 = $_POST['team1'];
 $team2 = $_POST['team2'];
 $team3 = $_POST['team3'];
-$team4 = $_POST['team4'];
+//$team4 = $_POST['team4'];
+
+if (str_contains($team1, $chkundscr)) {
+        $team1 = $_POST['team1'];
+} else {
+        $splitted_name = split_name($team1);
+        $team1 = $splitted_name['first'] . $chkundscr . $splitted_name['last'];
+}
+
+if (str_contains($team2, $chkundscr)) {
+        $team2 = $_POST['team2'];
+} else {
+        $splitted_name = split_name($team2);
+        $team2 = $splitted_name['first'] . $chkundscr . $splitted_name['last'];
+}
+
+if (str_contains($team3, $chkundscr)) {
+        $team3 = $_POST['team3'];
+} else {
+        $splitted_name = split_name($team3);
+        $team3 = $splitted_name['first'] . $chkundscr . $splitted_name['last'];
+}
 
 if (str_contains($name_full, $chkundscr)) {
         $name_full = $_POST['fullname'];
@@ -69,30 +90,30 @@ if (str_contains($name_full, $chkundscr)) {
 }
 
 $idcom = $name_full . $idname;
-$shipcom = $name_full . $shipname;
-$vehcom = $name_full . $vehname;
-$navcom = $name_full . $naviname;
+//$shipcom = $name_full . $shipname;
+//$vehcom = $name_full . $vehname;
+//$navcom = $name_full . $naviname;
 $drvcom = $name_full . $drvname;
 
 $idcard = $_FILES['idcardpicture']['name'];
-$shipimg = $_FILES['shippicture']['name'];
-$vehimg = $_FILES['vehiclepicture']['name'];
-$naviimg = $_FILES['navigatoridpicture']['name'];
+//$shipimg = $_FILES['shippicture']['name'];
+//$vehimg = $_FILES['vehiclepicture']['name'];
+//$naviimg = $_FILES['navigatoridpicture']['name'];
 $drvimg = $_FILES['drivinglicense']['name'];
 
 $idcardsize = $_FILES['idcardpicture']['size'];
-$shipimgsize = $_FILES['shippicture']['size'];
-$vehimgsize = $_FILES['vehiclepicture']['size'];
-$naviimgsize = $_FILES['navigatoridpicture']['size'];
+//$shipimgsize = $_FILES['shippicture']['size'];
+//$vehimgsize = $_FILES['vehiclepicture']['size'];
+//$naviimgsize = $_FILES['navigatoridpicture']['size'];
 $drvimgsize = $_FILES['drivinglicense']['size'];
 
 $allowTypes = array('png');
 
 
 $stmt = $dbh->prepare('INSERT INTO ezexpress (ispaid,p_name,team_state,team_name,p_member_1,p_member_2,'
-        . 'p_member_3,p_member_4,category_id) VALUES(?,?,?,?,?,?,?,?,?)');
+        . 'p_member_3,category_id) VALUES(?,?,?,?,?,?,?,?)');
 
-$stmt->execute([$ispaid, $name_full, $onteam, $teamname, $team1, $team2, $team3, $team4, $cat]);
+$stmt->execute([$ispaid, $name_full, $onteam, $teamname, $team1, $team2, $team3, $cat]);
 
 if (isset($_POST["submit"]) && strlen($idcard) > 0) {
         $extexplode = explode('.', $idcard);
@@ -139,140 +160,140 @@ if (isset($_POST["submit"]) && strlen($idcard) > 0) {
         );        
 }
 
-if (isset($_POST["submit"]) && strlen($shipimg) > 0) {
-        $extexplode = explode('.', $shipimg);
-        $ext = end($extexplode); // upload file ext
-        $name = $shipcom . '.' . $ext; // 
-        $stmt = $dbh->prepare('UPDATE ezexpress SET ship_img_path=? WHERE p_name=?');
-        $stmt->execute([$name, $name_full]);
-        if ($onserver == 1) {
-                $path = $_SERVER['DOCUMENT_ROOT'] . $serverdiir . $name;
-        } else {
-                $path = $localdir . $name;
-        }
-        if (in_array($ext, $allowTypes)) {
-                if (move_uploaded_file($_FILES["shippicture"]["tmp_name"], $path)) {
-                        array_push($response,array(
-                                "type" => "success",
-                                "message" => "File " . $name . " has been uploaded."
-                                )
-                        );
-                } else if ($drvimgsize > 2000000) {
-                                array_push($response,array(
-                                        "type" => "danger",
-                                        "message" => "Failed to upload " . $name . " files larger than 2MB."
-                                )
-                        );
-                } else {
-                        array_push($response,array(
-                                "type" => "danger",
-                                "message" => "Failed to upload " . $name . " files."
-                        ));
-                }
-        } else {
+// if (isset($_POST["submit"]) && strlen($shipimg) > 0) {
+//         $extexplode = explode('.', $shipimg);
+//         $ext = end($extexplode); // upload file ext
+//         $name = $shipcom . '.' . $ext; // 
+//         $stmt = $dbh->prepare('UPDATE ezexpress SET ship_img_path=? WHERE p_name=?');
+//         $stmt->execute([$name, $name_full]);
+//         if ($onserver == 1) {
+//                 $path = $_SERVER['DOCUMENT_ROOT'] . $serverdiir . $name;
+//         } else {
+//                 $path = $localdir . $name;
+//         }
+//         if (in_array($ext, $allowTypes)) {
+//                 if (move_uploaded_file($_FILES["shippicture"]["tmp_name"], $path)) {
+//                         array_push($response,array(
+//                                 "type" => "success",
+//                                 "message" => "File " . $name . " has been uploaded."
+//                                 )
+//                         );
+//                 } else if ($drvimgsize > 2000000) {
+//                                 array_push($response,array(
+//                                         "type" => "danger",
+//                                         "message" => "Failed to upload " . $name . " files larger than 2MB."
+//                                 )
+//                         );
+//                 } else {
+//                         array_push($response,array(
+//                                 "type" => "danger",
+//                                 "message" => "Failed to upload " . $name . " files."
+//                         ));
+//                 }
+//         } else {
                 
-                array_push($response,array(
-                        "type" => "danger",
-                        "message" => "Failed to upload " . $name . " files."
-                ));
-        }
+//                 array_push($response,array(
+//                         "type" => "danger",
+//                         "message" => "Failed to upload " . $name . " files."
+//                 ));
+//         }
 
-} else {
-        array_push($response, array(
-                "type" => "warning",
-                "message" => "No Files, Select File To Upload.")
-        );        
-}
+// } else {
+//         array_push($response, array(
+//                 "type" => "warning",
+//                 "message" => "No Files, Select File To Upload.")
+//         );        
+// }
 
-if (isset($_POST["submit"]) && strlen($vehimg) > 0) {
-        $extexplode = explode('.', $vehimg);
-        $ext = end($extexplode); // upload file ext
-        $name = $vehcom . '.' . $ext; // 
-        $stmt = $dbh->prepare('UPDATE ezexpress SET veh_img_path=? WHERE p_name=?');
-        $stmt->execute([$name, $name_full]);
-        if ($onserver == 1) {
-                $path = $_SERVER['DOCUMENT_ROOT'] . $serverdiir . $name;
-        } else {
-                $path = $localdir . $name;
-        }
-        if (in_array($ext, $allowTypes)) {
-                if (move_uploaded_file($_FILES["vehiclepicture"]["tmp_name"], $path)) {
-                        array_push($response,array(
-                                "type" => "success",
-                                "message" => "File " . $name . " has been uploaded."
-                                )
-                        );
-                } else if ($drvimgsize > 2000000) {
-                                array_push($response,array(
-                                        "type" => "danger",
-                                        "message" => "Failed to upload " . $name . " files larger than 2MB."
-                                )
-                        );
-                } else {
-                        array_push($response,array(
-                                "type" => "danger",
-                                "message" => "Failed to upload " . $name . " files."
-                        ));
-                }
-        } else {
+// if (isset($_POST["submit"]) && strlen($vehimg) > 0) {
+//         $extexplode = explode('.', $vehimg);
+//         $ext = end($extexplode); // upload file ext
+//         $name = $vehcom . '.' . $ext; // 
+//         $stmt = $dbh->prepare('UPDATE ezexpress SET veh_img_path=? WHERE p_name=?');
+//         $stmt->execute([$name, $name_full]);
+//         if ($onserver == 1) {
+//                 $path = $_SERVER['DOCUMENT_ROOT'] . $serverdiir . $name;
+//         } else {
+//                 $path = $localdir . $name;
+//         }
+//         if (in_array($ext, $allowTypes)) {
+//                 if (move_uploaded_file($_FILES["vehiclepicture"]["tmp_name"], $path)) {
+//                         array_push($response,array(
+//                                 "type" => "success",
+//                                 "message" => "File " . $name . " has been uploaded."
+//                                 )
+//                         );
+//                 } else if ($drvimgsize > 2000000) {
+//                                 array_push($response,array(
+//                                         "type" => "danger",
+//                                         "message" => "Failed to upload " . $name . " files larger than 2MB."
+//                                 )
+//                         );
+//                 } else {
+//                         array_push($response,array(
+//                                 "type" => "danger",
+//                                 "message" => "Failed to upload " . $name . " files."
+//                         ));
+//                 }
+//         } else {
                 
-                array_push($response,array(
-                        "type" => "danger",
-                        "message" => "Failed to upload " . $name . " files."
-                ));
-        }
+//                 array_push($response,array(
+//                         "type" => "danger",
+//                         "message" => "Failed to upload " . $name . " files."
+//                 ));
+//         }
 
-} else {
-        array_push($response, array(
-                "type" => "warning",
-                "message" => "No Files, Select File To Upload.")
-        );        
-}
+// } else {
+//         array_push($response, array(
+//                 "type" => "warning",
+//                 "message" => "No Files, Select File To Upload.")
+//         );        
+// }
 
-if (isset($_POST["submit"]) && strlen($naviimg) > 0) {
-        $extexplode = explode('.', $naviimg);
-        $ext = end($extexplode); // upload file ext
-        $name = $navcom . '.' . $ext; // 
-        $stmt = $dbh->prepare('UPDATE ezexpress SET navi_idcard_path=? WHERE p_name=?');
-        $stmt->execute([$name, $name_full]);
-        if ($onserver == 1) {
-                $path = $_SERVER['DOCUMENT_ROOT'] . $serverdiir . $name;
-        } else {
-                $path = $localdir . $name;
-        }
-        if (in_array($ext, $allowTypes)) {
-                if (move_uploaded_file($_FILES["navigatoridpicture"]["tmp_name"], $path)) {
-                        array_push($response,array(
-                                "type" => "success",
-                                "message" => "File " . $name . " has been uploaded."
-                                )
-                        );
-                } else if ($drvimgsize > 2000000) {
-                                array_push($response,array(
-                                        "type" => "danger",
-                                        "message" => "Failed to upload " . $name . " files larger than 2MB."
-                                )
-                        );
-                } else {
-                        array_push($response,array(
-                                "type" => "danger",
-                                "message" => "Failed to upload " . $name . " files."
-                        ));
-                }
-        } else {
+// if (isset($_POST["submit"]) && strlen($naviimg) > 0) {
+//         $extexplode = explode('.', $naviimg);
+//         $ext = end($extexplode); // upload file ext
+//         $name = $navcom . '.' . $ext; // 
+//         $stmt = $dbh->prepare('UPDATE ezexpress SET navi_idcard_path=? WHERE p_name=?');
+//         $stmt->execute([$name, $name_full]);
+//         if ($onserver == 1) {
+//                 $path = $_SERVER['DOCUMENT_ROOT'] . $serverdiir . $name;
+//         } else {
+//                 $path = $localdir . $name;
+//         }
+//         if (in_array($ext, $allowTypes)) {
+//                 if (move_uploaded_file($_FILES["navigatoridpicture"]["tmp_name"], $path)) {
+//                         array_push($response,array(
+//                                 "type" => "success",
+//                                 "message" => "File " . $name . " has been uploaded."
+//                                 )
+//                         );
+//                 } else if ($drvimgsize > 2000000) {
+//                                 array_push($response,array(
+//                                         "type" => "danger",
+//                                         "message" => "Failed to upload " . $name . " files larger than 2MB."
+//                                 )
+//                         );
+//                 } else {
+//                         array_push($response,array(
+//                                 "type" => "danger",
+//                                 "message" => "Failed to upload " . $name . " files."
+//                         ));
+//                 }
+//         } else {
                 
-                array_push($response,array(
-                        "type" => "danger",
-                        "message" => "Failed to upload " . $name . " files."
-                ));
-        }
+//                 array_push($response,array(
+//                         "type" => "danger",
+//                         "message" => "Failed to upload " . $name . " files."
+//                 ));
+//         }
 
-} else {
-        array_push($response, array(
-                "type" => "warning",
-                "message" => "No Files, Select File To Upload.")
-        );        
-}
+// } else {
+//         array_push($response, array(
+//                 "type" => "warning",
+//                 "message" => "No Files, Select File To Upload.")
+//         );        
+// }
 
 if (isset($_POST["submit"]) && strlen($drvimg) > 0) {
         $extexplode = explode('.', $drvimg);
