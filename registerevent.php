@@ -48,10 +48,7 @@ $naviname = "_NAV_ID";
 $drvname = "_DRV_LIC";
 $serverdiir = "/images/";
 $localdir = "images/";
-$response = array(
-        "type" => "",
-        "message" => ""
-);
+$response = array();
 
 $name_full = $_POST['fullname'];
 $onteam = $_POST['onteam'];
@@ -108,34 +105,36 @@ if (isset($_POST["submit"]) && strlen($idcard) > 0) {
         }
         if (in_array($ext, $allowTypes)) {
                 if (move_uploaded_file($_FILES["idcardpicture"]["tmp_name"], $path)) {
-                        $response = array(
+                        array_push($response,array(
                                 "type" => "success",
                                 "message" => "File " . $name . " has been uploaded."
+                                )
                         );
-                } else if ($idcardsize > 2000000) {
-                        $response = array(
-                                "type" => "danger",
-                                "message" => "Failed to upload " . $name . " files larger than 2MB."
+                } else if ($drvimgsize > 2000000) {
+                                array_push($response,array(
+                                        "type" => "danger",
+                                        "message" => "Failed to upload " . $name . " files larger than 2MB."
+                                )
                         );
                 } else {
-                        $response = array(
+                        array_push($response,array(
                                 "type" => "danger",
                                 "message" => "Failed to upload " . $name . " files."
-                        );
+                        ));
                 }
         } else {
-                $response = array(
+                
+                array_push($response,array(
                         "type" => "danger",
-                        "message" => "Sorry, only JPG, are allowed to upload."
-                );
+                        "message" => "Failed to upload " . $name . " files."
+                ));
         }
 
-        //var_dump($name);
 } else {
-        $response = array(
+        array_push($response, array(
                 "type" => "warning",
-                "message" => "No Files, Select File To Upload."
-        );
+                "message" => "No Files, Select File To Upload.")
+        );        
 }
 
 if (isset($_POST["submit"]) && strlen($shipimg) > 0) {
@@ -151,35 +150,36 @@ if (isset($_POST["submit"]) && strlen($shipimg) > 0) {
         }
         if (in_array($ext, $allowTypes)) {
                 if (move_uploaded_file($_FILES["shippicture"]["tmp_name"], $path)) {
-                        $response = array(
+                        array_push($response,array(
                                 "type" => "success",
                                 "message" => "File " . $name . " has been uploaded."
+                                )
                         );
-                } else if ($shipimgsize > 2000000) {
-                        $response = array(
-                                "type" => "danger",
-                                "message" => "Failed to upload " . $name . " files larger than 2MB."
+                } else if ($drvimgsize > 2000000) {
+                                array_push($response,array(
+                                        "type" => "danger",
+                                        "message" => "Failed to upload " . $name . " files larger than 2MB."
+                                )
                         );
                 } else {
-                        $response = array(
+                        array_push($response,array(
                                 "type" => "danger",
                                 "message" => "Failed to upload " . $name . " files."
-                        );
+                        ));
                 }
         } else {
-                $response = array(
+                
+                array_push($response,array(
                         "type" => "danger",
-                        "message" => "Sorry, only JPG, are allowed to upload."
-                );
+                        "message" => "Failed to upload " . $name . " files."
+                ));
         }
 
-        //var_dump($name);
-
 } else {
-        $response = array(
+        array_push($response, array(
                 "type" => "warning",
-                "message" => "No Files, Select File To Upload."
-        );
+                "message" => "No Files, Select File To Upload.")
+        );        
 }
 
 if (isset($_POST["submit"]) && strlen($vehimg) > 0) {
@@ -195,34 +195,36 @@ if (isset($_POST["submit"]) && strlen($vehimg) > 0) {
         }
         if (in_array($ext, $allowTypes)) {
                 if (move_uploaded_file($_FILES["vehiclepicture"]["tmp_name"], $path)) {
-                        $response = array(
+                        array_push($response,array(
                                 "type" => "success",
                                 "message" => "File " . $name . " has been uploaded."
+                                )
                         );
-                } else if ($vehimgsize > 2000000) {
-                        $response = array(
-                                "type" => "danger",
-                                "message" => "Failed to upload " . $name . " files larger than 2MB."
+                } else if ($drvimgsize > 2000000) {
+                                array_push($response,array(
+                                        "type" => "danger",
+                                        "message" => "Failed to upload " . $name . " files larger than 2MB."
+                                )
                         );
                 } else {
-                        $response = array(
+                        array_push($response,array(
                                 "type" => "danger",
                                 "message" => "Failed to upload " . $name . " files."
-                        );
+                        ));
                 }
         } else {
-                $response = array(
+                
+                array_push($response,array(
                         "type" => "danger",
-                        "message" => "Sorry, only JPG, are allowed to upload."
-                );
+                        "message" => "Failed to upload " . $name . " files."
+                ));
         }
-        //var_dump($name);
 
 } else {
-        $response = array(
+        array_push($response, array(
                 "type" => "warning",
-                "message" => "No Files, Select File To Upload."
-        );
+                "message" => "No Files, Select File To Upload.")
+        );        
 }
 
 if (isset($_POST["submit"]) && strlen($naviimg) > 0) {
@@ -238,34 +240,36 @@ if (isset($_POST["submit"]) && strlen($naviimg) > 0) {
         }
         if (in_array($ext, $allowTypes)) {
                 if (move_uploaded_file($_FILES["navigatoridpicture"]["tmp_name"], $path)) {
-                        $response = array(
+                        array_push($response,array(
                                 "type" => "success",
                                 "message" => "File " . $name . " has been uploaded."
+                                )
                         );
-                } else if ($naviimgsize > 2000000) {
-                        $response = array(
-                                "type" => "danger",
-                                "message" => "Failed to upload " . $name . " files larger than 2MB."
+                } else if ($drvimgsize > 2000000) {
+                                array_push($response,array(
+                                        "type" => "danger",
+                                        "message" => "Failed to upload " . $name . " files larger than 2MB."
+                                )
                         );
                 } else {
-                        $response = array(
+                        array_push($response,array(
                                 "type" => "danger",
                                 "message" => "Failed to upload " . $name . " files."
-                        );
+                        ));
                 }
         } else {
-                $response = array(
+                
+                array_push($response,array(
                         "type" => "danger",
-                        "message" => "Sorry, only JPG, are allowed to upload."
-                );
+                        "message" => "Failed to upload " . $name . " files."
+                ));
         }
-        //var_dump($name);
 
 } else {
-        $response = array(
+        array_push($response, array(
                 "type" => "warning",
-                "message" => "No Files, Select File To Upload."
-        );
+                "message" => "No Files, Select File To Upload.")
+        );        
 }
 
 if (isset($_POST["submit"]) && strlen($drvimg) > 0) {
@@ -281,33 +285,36 @@ if (isset($_POST["submit"]) && strlen($drvimg) > 0) {
         }
         if (in_array($ext, $allowTypes)) {
                 if (move_uploaded_file($_FILES["drivinglicense"]["tmp_name"], $path)) {
-                        $response = array(
+                        array_push($response,array(
                                 "type" => "success",
                                 "message" => "File " . $name . " has been uploaded."
+                                )
                         );
                 } else if ($drvimgsize > 2000000) {
-                        $response = array(
-                                "type" => "danger",
-                                "message" => "Failed to upload " . $name . " files larger than 2MB."
+                                array_push($response,array(
+                                        "type" => "danger",
+                                        "message" => "Failed to upload " . $name . " files larger than 2MB."
+                                )
                         );
                 } else {
-                        $response = array(
+                        array_push($response,array(
                                 "type" => "danger",
                                 "message" => "Failed to upload " . $name . " files."
-                        );
+                        ));
                 }
         } else {
-                $response = array(
+                
+                array_push($response,array(
                         "type" => "danger",
-                        "message" => "Sorry, only JPG, are allowed to upload."
-                );
+                        "message" => "Failed to upload " . $name . " files."
+                ));
         }
 
 } else {
-        $response = array(
+        array_push($response, array(
                 "type" => "warning",
-                "message" => "No Files, Select File To Upload."
-        );
+                "message" => "No Files, Select File To Upload.")
+        );        
 }
 
 $_SESSION['error'] = $response;

@@ -1,4 +1,16 @@
 <?php
+
+function split_name($name)
+{
+        $name = trim($name);
+        $last_name = (strpos($name, ' ') === false) ? '' : preg_replace('#.*\s([\w-]*)$#', '$1', $name);
+        $first_name = trim(preg_replace('#' . preg_quote($last_name, '#') . '#', '', $name));
+
+        return array(
+                'first' => $first_name,
+                'last' => $last_name,
+        );
+}
 function generate_csrf() {
     return md5(uniqid(mt_rand(), true));
 }
@@ -15,11 +27,18 @@ else
 
 
 $stmt = $stmtfind = null;
+$chkundscr = "_";
 
 
 if (isset($_GET['find'])) {
+    if (str_contains($_GET['find'], $chkundscr)) {
+        $search = '%' . $_GET['find'] . '%';
+    } else {
+            $splitted_name = split_name($_GET['find']);
+            $search = $splitted_name['first'] . $chkundscr . $splitted_name['last'];
+    }
 
-    $search = '%' . $_GET['find'] . '%';
+    
     $search_like = $search;
     $stmtfind = $dbh->prepare("SELECT ez.id, ez.drive_lic_path, ez.ispaid, ez.veh_img_path, ez.navi_idcard_path, ez.ship_img_path, "
         . "ez.id_img_path, ez.p_name, ez.team_name, ez.p_member_1, ez.p_member_2, ez.p_member_3, ez.p_member_4, k.category "
@@ -76,6 +95,11 @@ $_SESSION['csrf_token'] = $csrf_token;
                 transition: max-height 0.2s ease-out;
                 background-color: #f1f1f1;
             }
+
+            .flying{
+                position: absolute;
+                z-index: 9999;
+            }
         </style>
 
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.13.1/datatables.min.css"/>
@@ -99,9 +123,10 @@ $_SESSION['csrf_token'] = $csrf_token;
         ?>
 
         <?php
-            if(!empty($error)) {
+            if(isset($error) && !empty($error)){
+            foreach ($error as $error) {
         ?>
-        <div class="toast" data-autohide="false">
+        <div class="toast flying" data-autohide="false">
         <div class="toast-header">
             <strong class="mr-auto text-primary"><?php echo $error['type']; ?></strong>
             <small class="text-muted">Theres an <?php echo $error['type']; ?></small>
@@ -111,7 +136,7 @@ $_SESSION['csrf_token'] = $csrf_token;
                 <?php echo $error['message']; ?>
             </div>
         </div>
-        <?php } ?>
+        <?php }} ?>
 
         <div class="container pt-5">
             <div class="row mb-3">
@@ -141,6 +166,7 @@ $_SESSION['csrf_token'] = $csrf_token;
             </div>
             
         </div>
+        <?php if (isset($_GET['find']) && !empty($_GET['find'])) { ?>
                     <div class="row">
                         <div class="col-md-12">
                             <div id="accordion">
@@ -169,7 +195,6 @@ $_SESSION['csrf_token'] = $csrf_token;
                                                     </tr>
                                             </thead>
                                 <?php
-                                if (isset($_GET['find'])) {
                                     while ($row = $stmtfind->fetch()) {
 
                                         $paidplayer = $vehimgfull = $idimgfull = $shipimgfull = $drivelicimgfull = $navididimgfull = '';

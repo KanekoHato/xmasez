@@ -1,6 +1,6 @@
 <?php
 
-$onserver = 1;
+$onserver = getenv('SERVER_MODE') == TRUE ? 1 : 0;
 if ($onserver == 1){
     include($_SERVER['DOCUMENT_ROOT'].'/include/dbconnection.php');
 } 
