@@ -73,7 +73,6 @@ session_start();
                                                 <th>Member 1</th>
                                                 <th>Member 2</th>
                                                 <th>Member 3</th>
-                                                <th>Member 4</th>
                                                 <th>Is Paid</th>
                                                 <th>ID Card</th>
                                                 <th>Vehicle Image</th>
@@ -114,7 +113,6 @@ session_start();
                                                     <td>' . $row['p_member_1'] . '</td>
                                                     <td>' . $row['p_member_2'] . '</td>
                                                     <td>' . $row['p_member_3'] . '</td>
-                                                    <td>' . $row['p_member_4'] . '</td>
                                                     <td>' . $row['ispaid'] . '</td>
                                                     <td><a href="images/'. $row['id_img_path'] .'" target="_blank">' . $idimgfull . '</a></td>
                                                     <td><a href="images/'. $row['veh_img_path'] .'" target="_blank">'. $vehimgfull .'</a></td>

@@ -185,7 +185,6 @@ $_SESSION['csrf_token'] = $csrf_token;
                                                         <th>Member 1</th>
                                                         <th>Member 2</th>
                                                         <th>Member 3</th>
-                                                        <th>Member 4</th>
                                                         <th>Paid Status</th>
                                                         <th>ID Card</th>
                                                         <th>Vehicle Image</th>
@@ -234,7 +233,6 @@ $_SESSION['csrf_token'] = $csrf_token;
                                                         <td>' . $row['p_member_1'] . '</td>
                                                         <td>' . $row['p_member_2'] . '</td>
                                                         <td>' . $row['p_member_3'] . '</td>
-                                                        <td>' . $row['p_member_4'] . '</td>
                                                         <td>'. $paidplayer .'</td>
                                                         <td><a href="images/' . $row['id_img_path'] . '" target="_blank">' . $idimgfull . '</a></td>
                                                         <td><a href="images/' . $row['veh_img_path'] . '" target="_blank">' . $vehimgfull . '</a></td>
@@ -322,9 +320,10 @@ $_SESSION['csrf_token'] = $csrf_token;
 
                                                     <label for="team3">Team Member 3</label>
                                                     <input placeholder="Ensley_Naoko" type="text" name="team3" class="form-control">
-
-                                                    <label for="team4">Team Member 4</label>
-                                                    <input placeholder="Ensley_Amai" type="text" name="team4" class="form-control">
+                                                    <div class="hidden">
+                                                        <label for="team4">Team Member 4</label>
+                                                        <input placeholder="Ensley_Amai" type="text" name="team4" class="form-control">
+                                                    </div>
                                                 </div>
                                             </div>
                                                 <div id="hideforrallyandfish" class="hidden">
