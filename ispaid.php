@@ -15,11 +15,11 @@
      include('./include/dbconnection.php');
  }
 
-$name_full = $_POST['ispaidfind'];
+$name_id = $_POST['ispaidfind'];
 $ispaid = "Paid";
 
 $stmt = $dbh->prepare('UPDATE ezexpress SET ispaid=? WHERE id=?');
-$stmt->execute([$ispaid,$name_full]);
+$stmt->execute([$ispaid,$name_id]);
 
 echo "<script>location.href='admin.php';</script>";
 
