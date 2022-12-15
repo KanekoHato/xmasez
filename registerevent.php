@@ -25,9 +25,11 @@ $sess_csrf_token = isset($_SESSION['csrf_token']) ? $_SESSION['csrf_token'] : nu
 $_csrf_token = $_POST['_csrf'];
 
 if (!$sess_csrf_token || $_csrf_token != $sess_csrf_token) {
-        $_SESSION['error'] = array (
-                "type" => "danger",
-                "message" => "Invalid request",
+        $_SESSION['error'] = array(
+                array (
+                        "type" => "danger",
+                        "message" => "Invalid request",
+                )
         );
         echo "<script>location.href='index.php';</script>";
         return;
