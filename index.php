@@ -1,5 +1,5 @@
 <?php
-
+$onserver = getenv('SERVER_MODE') == TRUE ? 1 : 0;
 function split_name($name)
 {
     $name = trim($name);
@@ -16,7 +16,7 @@ function generate_csrf()
     return md5(uniqid(mt_rand(), true));
 }
 
-$onserver = getenv('SERVER_MODE') == TRUE ? 1 : 0;
+
 if ($onserver == 1) {
     include($_SERVER['DOCUMENT_ROOT'] . '/include/dbconnection.php');
 } else {
@@ -326,35 +326,6 @@ $_SESSION['csrf_token'] = $csrf_token;
             </div>
         </div>
         <script>
-            // var onteam = document.getElementById('teamselect');
-            // var team = document.getElementById('showteam');
-            var event = document.getElementById('eventselect');
-            var hideforrally = document.getElementById('hideforrally');
-            var hideforfishing = document.getElementById('hideforfishing');
-
-            event.addEventListener('change', function ()){
-                hideforrally.classList.add('hidden');
-                hideforfishing.classList.add('hidden');
-
-                    
-                    if(event.value === '1'){
-                        hideforrally.classList.remove('hidden');
-                    }else if(event.value === '2'){
-                        echo 'LMAO';
-                    }else if(event.value === '3'){
-                        hideforrally.classList.remove('hidden');
-                        hideforfishing.classList.add('hidden');
-                    }
-            }
-
-            // onteam.addEventListener('change', function () {
-            //     team.classList.add('hidden');
-
-            //     if (onteam.value === '1') {
-            //         team.classList.remove('hidden');
-            //     }
-            // });
-
             $(document).ready(function () {
                 $('#viewmyregdata').DataTable();
             });

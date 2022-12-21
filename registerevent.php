@@ -5,7 +5,7 @@
 * To change this template file, choose Tools | Templates
 * and open the template in the editor.
 */
-
+$onserver = getenv('SERVER_MODE') == TRUE ? 1 : 0;
 function split_name($name)
 {
         $name = trim($name);
@@ -18,7 +18,7 @@ function split_name($name)
         );
 }
 
-$onserver = getenv('SERVER_MODE') == TRUE ? 1 : 0;
+
 session_start();
 
 $sess_csrf_token = isset($_SESSION['csrf_token']) ? $_SESSION['csrf_token'] : null;
