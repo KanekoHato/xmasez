@@ -366,9 +366,6 @@ $_SESSION['csrf_token'] = $csrf_token;
                         <li class="list-group-item">For Paintball Participant Please Fill In Only : Your Name,ID ,
                             License, Team Name, Team Member 1,2 & 3 Field.
                         </li>
-                        <li class="list-group-item">For Paintball Participant Please Fill In Only : Your Name,ID ,
-                            License, Team Name, Team Member 1,2 & 3 Field.
-                        </li>
                         <li class="list-group-item">You Can Register For Multiple Event, 
                             Just Re Submit Another Registration Application.
                         </li>
