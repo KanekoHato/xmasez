@@ -292,7 +292,7 @@ $_SESSION['csrf_token'] = $csrf_token;
                                             class="form-select">
                                             <option value="0" disabled>Are You On Team?</option>
                                             <option value="1" selected>Yes</option>
-                                            <option value="2" disabled>No</option>
+                                            <option value="2" >No</option>
                                         </select>
                                     </div>
                                     
