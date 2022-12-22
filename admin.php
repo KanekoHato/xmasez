@@ -74,9 +74,9 @@ session_start();
                                                 <th>Member 2</th>
                                                 <th>Member 3</th>
                                                 <th>Is Paid</th>
+                                                <th>Qualifier</th>
                                                 <th>ID Card</th>
                                                 <th>Drv Lic</th>
-                                                <th>Qualifier</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>

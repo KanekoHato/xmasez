@@ -229,8 +229,8 @@ $_SESSION['csrf_token'] = $csrf_token;
                                                         <td>' . $row['p_member_1'] . '</td>
                                                         <td>' . $row['p_member_2'] . '</td>
                                                         <td>' . $row['p_member_3'] . '</td>
-                                                        <td>' . $qualifier . '</td>
                                                         <td>' . $paidplayer . '</td>
+                                                        <td>' . $qualifier . '</td>
                                                         <td><a href="images/' . $row['id_img_path'] . '" target="_blank">' . $idimgfull . '</a></td>
                                                         <td><a href="images/' . $row['drive_lic_path'] . '" target="_blank">' . $drivelicimgfull . '</a></td>
                                                     </tr>
