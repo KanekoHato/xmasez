@@ -66,7 +66,8 @@ $_SESSION['csrf_token'] = $csrf_token;
     ?>
 
     <style>
-        .hidden {
+        #hideforrally,
+        #hideforfishing {
             display: none;
         }
 
@@ -219,7 +220,7 @@ $_SESSION['csrf_token'] = $csrf_token;
             if ($row['drive_lic_path'] > 0) {
                 $drivelicimgfull = '<img width="50px" height="50px" src=images/' . $row['drive_lic_path'] . '>';
             }
-            
+
             echo '
                                                 
                                                     <tr>
@@ -369,7 +370,7 @@ $_SESSION['csrf_token'] = $csrf_token;
                         <li class="list-group-item">For Paintball Participant Please Fill In Only : Your Name,ID ,
                             License, Team Name, Team Member 1,2 & 3 Field.
                         </li>
-                        <li class="list-group-item">You Can Register For Multiple Event, 
+                        <li class="list-group-item">You Can Register For Multiple Event,
                             Just Re Submit Another Registration Application.
                         </li>
                     </ul>
@@ -402,6 +403,22 @@ $_SESSION['csrf_token'] = $csrf_token;
     </script>
     <script>
         $(document).ready(function () {
+            $('#eventselect').change(function () {
+                // Hide all elements
+                $('#hideforrally, #hideforfishing').hide();
+
+                // Show the selected element
+                var selected = $(this).val();
+                if (selected == 2) {
+                    $('hideforrally').show();
+                } else if (selected == 3) {
+                    $('#hideforfishing').show();
+                } else {
+                    $('hideforrally').show();
+                    $('#hideforfishing').show();
+                }
+            });
+
             $('.toast').toast('show');
         });
         $('#modal1').modal('hide');
