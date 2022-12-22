@@ -265,12 +265,19 @@ $_SESSION['csrf_token'] = $csrf_token;
                                     required autofocus>
                             </div>
                             <div>
+                                <label for="event_select">Choose Event</label>
                                 <select class="btn btn-primary" id="eventselect" name="event_select"
                                     class="form-select">
                                     <?php
                                     $stmt = $dbh->query('SELECT * FROM category');
                                     while ($row = $stmt->fetch()) {
-                                        echo '<option value="' . $row['id'] . '">' . $row['category'] . '</option>';
+                                        if ($row['id'] == 0) {
+                                            echo '<option value="' . $row['id'] . '" disabled>' . $row['category'] . '</option>';
+
+                                        } else {
+                                            echo '<option value="' . $row['id'] . '">' . $row['category'] . '</option>';
+                                        }
+                                        
                                     }
                                     ?>
                                 </select>
