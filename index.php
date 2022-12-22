@@ -249,9 +249,7 @@ $_SESSION['csrf_token'] = $csrf_token;
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="eventregister">Register To The Event</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <button type="button" class="btn btn-secondary" onclick="$('#eventregister').modal('hide')">Close</button>
                 </div>
                 <form action="registerevent.php" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="_csrf" value="<?= $csrf_token ?>" />
@@ -327,7 +325,7 @@ $_SESSION['csrf_token'] = $csrf_token;
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-secondary" onclick="$('#eventregister').modal('hide')">Close</button>
                                 <button type="submit" name="submit" value="Upload" class="btn btn-primary">Sent</button>
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#eventregulation">Regulation</button>
                             </div>
@@ -342,9 +340,7 @@ $_SESSION['csrf_token'] = $csrf_token;
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="eventregulation">EVENT REGULATION</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <button type="button" class="btn btn-secondary" onclick="$('#eventregulation').modal('hide')">Close</button>
                 </div>
                 <div class="modal-body">
                     <ul class="list-group">
@@ -353,7 +349,7 @@ $_SESSION['csrf_token'] = $csrf_token;
                         <li class="list-group-item">For Offroad Participant Please Fill In Only: Your Name, ID, License
                             Field</li>
                         <li class="list-group-item">For Paintball Participant Please Fill In Only : Your Name,ID ,
-                            License, Team Name, Team Member 1,2&3 Field
+                            License, Team Name, Team Member 1,2 & 3 Field
                         </li>
                     </ul>
                 </div>
@@ -387,6 +383,8 @@ $_SESSION['csrf_token'] = $csrf_token;
         $(document).ready(function () {
             $('.toast').toast('show');
         });
+        $('#modal1').modal('hide');
+        $('#eventregulation').modal('hide');
     </script>
     <?php $_SESSION['error'] = null; ?>
 </body>
