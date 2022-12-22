@@ -34,7 +34,7 @@ if (isset($_GET['find'])) {
         $search = '%' . $_GET['find'] . '%';
     } else {
         $splitted_name = split_name($_GET['find']);
-        $search = $splitted_name['first'] . $chkundscr . $splitted_name['last'];
+        $search = '%' . $splitted_name['first'] . $chkundscr . $splitted_name['last'] . '%';
     }
 
 
