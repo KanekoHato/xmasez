@@ -360,14 +360,17 @@ $_SESSION['csrf_token'] = $csrf_token;
                 <div class="modal-body">
                     <ul class="list-group">
                         <li class="list-group-item">For Fishing Participant Please Fill In Only: Your Name, ID, License,
-                            Team Name, Team Member 1 Field</li>
+                            Team Name, Team Member 1 Field.</li>
                         <li class="list-group-item">For Offroad Participant Please Fill In Only: Your Name, ID, License
-                            Field</li>
+                            Field.</li>
                         <li class="list-group-item">For Paintball Participant Please Fill In Only : Your Name,ID ,
-                            License, Team Name, Team Member 1,2 & 3 Field
+                            License, Team Name, Team Member 1,2 & 3 Field.
                         </li>
                         <li class="list-group-item">For Paintball Participant Please Fill In Only : Your Name,ID ,
-                            License, Team Name, Team Member 1,2 & 3 Field
+                            License, Team Name, Team Member 1,2 & 3 Field.
+                        </li>
+                        <li class="list-group-item">You Can Register For Multiple Event, 
+                            Just Re Submit Another Registration Application.
                         </li>
                     </ul>
                 </div>
