@@ -48,6 +48,7 @@ $drvname = "_DRV_LIC";
 $serverdiir = "/images/";
 $localdir = "images/";
 $response = array();
+$qualifier = "Qualified";
 
 $name_full = $_POST['fullname'];
 $onteam = $_POST['onteam'];
@@ -97,9 +98,9 @@ $allowTypes = array('png');
 
 
 $stmt = $dbh->prepare('INSERT INTO ezexpress (ispaid,p_name,team_state,team_name,p_member_1,p_member_2,'
-        . 'p_member_3,category_id) VALUES(?,?,?,?,?,?,?,?)');
+        . 'p_member_3,category_id,qualifier) VALUES(?,?,?,?,?,?,?,?,?)');
 
-$stmt->execute([$ispaid, $name_full, $onteam, $teamname, $team1, $team2, $team3, $cat]);
+$stmt->execute([$ispaid, $name_full, $onteam, $teamname, $team1, $team2, $team3, $cat, $qualifier]);
 
 if (isset($_POST["submit"]) && strlen($idcard) > 0) {
         $extexplode = explode('.', $idcard);
