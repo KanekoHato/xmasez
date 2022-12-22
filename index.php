@@ -249,7 +249,8 @@ $_SESSION['csrf_token'] = $csrf_token;
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="eventregister">Register To The Event</h5>
-                    <button type="button" class="btn btn-secondary" onclick="$('#eventregister').modal('hide')">Close</button>
+                    <button type="button" class="btn btn-secondary"
+                        onclick="$('#eventregister').modal('hide')">Close</button>
                 </div>
                 <form action="registerevent.php" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="_csrf" value="<?= $csrf_token ?>" />
@@ -325,9 +326,11 @@ $_SESSION['csrf_token'] = $csrf_token;
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" onclick="$('#eventregister').modal('hide')">Close</button>
+                                <button type="button" class="btn btn-secondary"
+                                    onclick="$('#eventregister').modal('hide')">Close</button>
                                 <button type="submit" name="submit" value="Upload" class="btn btn-primary">Sent</button>
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#eventregulation">Regulation</button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                    data-target="#eventregulation">Regulation</button>
                             </div>
                 </form>
             </div>
@@ -340,7 +343,8 @@ $_SESSION['csrf_token'] = $csrf_token;
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="eventregulation">EVENT REGULATION</h5>
-                    <button type="button" class="btn btn-secondary" onclick="$('#eventregulation').modal('hide')">Close</button>
+                    <button type="button" class="btn btn-secondary"
+                        onclick="$('#eventregulation').modal('hide')">Close</button>
                 </div>
                 <div class="modal-body">
                     <ul class="list-group">
