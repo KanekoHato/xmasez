@@ -1,6 +1,6 @@
 <?php
 
-$onserver = 1;
+$onserver = getenv('SERVER_MODE') == TRUE ? 1 : 0;
 if ($onserver == 1){
     include($_SERVER['DOCUMENT_ROOT'].'/include/dbconnection.php');
 } 
@@ -11,7 +11,7 @@ else
 
 $stmt = $stmtfind = $category_tl = null;
 
-$stmtfind = $dbh->prepare("SELECT ez.id, ez.drive_lic_path, ez.ispaid, ez.veh_img_path, ez.navi_idcard_path, ez.ship_img_path, " 
+$stmtfind = $dbh->prepare("SELECT ez.id, ez.drive_lic_path, ez.ispaid, " 
 . "ez.id_img_path, ez.p_name, ez.team_name, ez.p_member_1, ez.p_member_2, ez.p_member_3, ez.p_member_4, k.category "
 . "FROM ezexpress ez join category k on ez.category_id = k.id");
        
@@ -73,13 +73,9 @@ session_start();
                                                 <th>Member 1</th>
                                                 <th>Member 2</th>
                                                 <th>Member 3</th>
-                                                <th>Member 4</th>
                                                 <th>Is Paid</th>
                                                 <th>ID Card</th>
-                                                <th>Vehicle Image</th>
-                                                <th>Ship Image</th>
                                                 <th>Drv Lic</th>
-                                                <th>Navig ID Card</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
@@ -90,20 +86,11 @@ session_start();
                             {
                                 $vehimgfull = $idimgfull = $shipimgfull = $drivelicimgfull = $navididimgfull = '';
 
-                                if($row['veh_img_path'] > 0){
-                                    $vehimgfull = '<img width="50px" height="50px" src=images/' . $row['veh_img_path'] . '>';                 
-                                }
-                                if($row['ship_img_path'] > 0){
-                                    $shipimgfull = '<img width="50px" height="50px" src=images/' . $row['ship_img_path'] . '>';                 
-                                }
                                 if($row['id_img_path'] > 0){
                                     $idimgfull = '<img width="50px" height="50px" src=images/' . $row['id_img_path'] . '>';                 
                                 }
                                 if($row['drive_lic_path'] > 0){
                                     $drivelicimgfull = '<img width="50px" height="50px" src=images/' . $row['drive_lic_path'] . '>';                 
-                                }
-                                if($row['navi_idcard_path'] > 0){
-                                    $navididimgfull = '<img width="50px" height="50px" src=images/' . $row['navi_idcard_path'] . '>';                 
                                 }
                                     echo '
                                     
@@ -114,13 +101,9 @@ session_start();
                                                     <td>' . $row['p_member_1'] . '</td>
                                                     <td>' . $row['p_member_2'] . '</td>
                                                     <td>' . $row['p_member_3'] . '</td>
-                                                    <td>' . $row['p_member_4'] . '</td>
                                                     <td>' . $row['ispaid'] . '</td>
                                                     <td><a href="images/'. $row['id_img_path'] .'" target="_blank">' . $idimgfull . '</a></td>
-                                                    <td><a href="images/'. $row['veh_img_path'] .'" target="_blank">'. $vehimgfull .'</a></td>
-                                                    <td><a href="images/'. $row['ship_img_path'] .'" target="_blank">'. $shipimgfull .'</a></td>
                                                     <td><a href="images/'. $row['drive_lic_path'] .'" target="_blank">' . $drivelicimgfull . '</a></td>
-                                                    <td><a href="images/'. $row['navi_idcard_path'] .'" target="_blank">' . $navididimgfull . '</a></td>
                                                     <td>
                                                         <form action="ispaid.php" method="POST">
                                                             <button name="ispaidfind" class="btn btn-primary" type="submit" value="' . $row['id'] . '">PAID</button>

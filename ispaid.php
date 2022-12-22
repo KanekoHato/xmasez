@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
- $onserver = 1;
+ $onserver = getenv('SERVER_MODE') == TRUE ? 1 : 0;
  if ($onserver == 1){
      include($_SERVER['DOCUMENT_ROOT'].'/include/dbconnection.php');
  } 
@@ -15,11 +15,11 @@
      include('./include/dbconnection.php');
  }
 
-$name_full = $_POST['ispaidfind'];
+$name_id = $_POST['ispaidfind'];
 $ispaid = "Paid";
 
 $stmt = $dbh->prepare('UPDATE ezexpress SET ispaid=? WHERE id=?');
-$stmt->execute([$ispaid,$name_full]);
+$stmt->execute([$ispaid,$name_id]);
 
 echo "<script>location.href='admin.php';</script>";
 
