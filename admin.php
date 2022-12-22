@@ -116,6 +116,7 @@ session_start();
                                                         <form action="qualifierupdate.php" method="POST">
                                                             <select class="btn btn-primary" id="qualifierupdate" name="qualifier"
                                                             class="form-select">
+                                                                <option value="Qualified">Qualified</option>
                                                                 <option value="Disqualified">Disqualified</option>
                                                                 <option value="Eliminated">Eliminated</option>
                                                                 <option value="Semi_Final">Semi Final</option>
