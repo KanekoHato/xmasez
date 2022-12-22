@@ -265,6 +265,7 @@ $_SESSION['csrf_token'] = $csrf_token;
                                     required autofocus>
                             </div>
                             <div>
+                                <label for="event_select">Choose Event</label>
                                 <select class="btn btn-primary" id="eventselect" name="event_select"
                                     class="form-select">
                                     <?php
