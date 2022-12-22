@@ -164,6 +164,9 @@ $_SESSION['csrf_token'] = $csrf_token;
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#eventregister">
                 Register To The Event
             </button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#eventregulation">
+                REGULATION
+            </button>
 
         </div>
 
@@ -330,10 +333,6 @@ $_SESSION['csrf_token'] = $csrf_token;
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                                 <button type="submit" name="submit" value="Upload" class="btn btn-primary">Sent</button>
-                                <button type="button" class="btn btn-primary" data-toggle="modal"
-                                    data-target="#eventregulation">
-                                    REGULATION
-                                </button>
                             </div>
                 </form>
             </div>
@@ -351,14 +350,17 @@ $_SESSION['csrf_token'] = $csrf_token;
                     </button>
                 </div>
                 <div class="modal-body">
-                <ul class="list-group">
-                    <li class="list-group-item">For Fishing Participant Please Fill In Only: Your Name, ID, License, Team Name, Team Member 1 Field</li>
-                    <li class="list-group-item">For Offroad Participant Please Fill In Only: Your Name, ID, License Field</li>
-                    <li class="list-group-item">For Paintball Participant Please Fill In Only : Your Name,ID , License, Team Name, Team Member 1,2&3 Field
-                    </li>
-                </ul>
+                    <ul class="list-group">
+                        <li class="list-group-item">For Fishing Participant Please Fill In Only: Your Name, ID, License,
+                            Team Name, Team Member 1 Field</li>
+                        <li class="list-group-item">For Offroad Participant Please Fill In Only: Your Name, ID, License
+                            Field</li>
+                        <li class="list-group-item">For Paintball Participant Please Fill In Only : Your Name,ID ,
+                            License, Team Name, Team Member 1,2&3 Field
+                        </li>
+                    </ul>
                 </div>
-                
+
             </div>
         </div>
     </div>
