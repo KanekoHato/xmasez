@@ -164,10 +164,6 @@ $_SESSION['csrf_token'] = $csrf_token;
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#eventregister">
                 Register To The Event
             </button>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#eventregulation">
-                REGULATION
-            </button>
-
         </div>
 
     </div>
@@ -333,6 +329,7 @@ $_SESSION['csrf_token'] = $csrf_token;
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                                 <button type="submit" name="submit" value="Upload" class="btn btn-primary">Sent</button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#eventregulation">Regulation</button>
                             </div>
                 </form>
             </div>
