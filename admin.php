@@ -12,7 +12,7 @@ else
 $stmt = $stmtfind = $category_tl = null;
 
 $stmtfind = $dbh->prepare("SELECT ez.id, ez.drive_lic_path, ez.ispaid, " 
-. "ez.id_img_path, ez.p_name, ez.team_name, ez.p_member_1, ez.p_member_2, ez.p_member_3, ez.p_member_4, k.category "
+. "ez.id_img_path, ez.p_name, ez.team_name, ez.p_member_1, ez.p_member_2, ez.p_member_3, ez.p_member_4, ez.qualifier, k.category "
 . "FROM ezexpress ez join category k on ez.category_id = k.id");
        
     $stmtfind->execute();
@@ -76,6 +76,7 @@ session_start();
                                                 <th>Is Paid</th>
                                                 <th>ID Card</th>
                                                 <th>Drv Lic</th>
+                                                <th>Qualifier</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
@@ -102,6 +103,7 @@ session_start();
                                                     <td>' . $row['p_member_2'] . '</td>
                                                     <td>' . $row['p_member_3'] . '</td>
                                                     <td>' . $row['ispaid'] . '</td>
+                                                    <td>' . $row['qualifier'] . '</td>
                                                     <td><a href="images/'. $row['id_img_path'] .'" target="_blank">' . $idimgfull . '</a></td>
                                                     <td><a href="images/'. $row['drive_lic_path'] .'" target="_blank">' . $drivelicimgfull . '</a></td>
                                                     <td>
@@ -110,6 +112,17 @@ session_start();
                                                         </form>
                                                         <form action="removeparticipant.php" method="POST">
                                                             <button name="ispaidfind" class="btn btn-danger" type="submit" value="' . $row['id'] . '">DELETE</button>
+                                                        </form>
+                                                        <form action="qualifierupdate.php" method="POST">
+                                                            <select class="btn btn-primary" id="qualifierupdate" name="qualifier"
+                                                            class="form-select">
+                                                                <option value="Disqualified">Disqualified</option>
+                                                                <option value="Eliminated">Eliminated</option>
+                                                                <option value="Semi_Final">Semi Final</option>
+                                                                <option value="Final">Final</option>
+                                                                <option value="Winner">Winner</option>
+                                                            </select>
+                                                            <button name="ispaidfind" class="btn btn-danger" type="submit" value="' . $row['id'] . '">Update Qualifier</button>
                                                         </form>
                                                 </td>
                                                 </tr>

@@ -40,7 +40,7 @@ if (isset($_GET['find'])) {
 
     $search_like = $search;
     $stmtfind = $dbh->prepare("SELECT ez.id, ez.drive_lic_path, ez.ispaid, "
-        . "ez.id_img_path, ez.p_name, ez.team_name, ez.p_member_1, ez.p_member_2, ez.p_member_3, ez.p_member_4, k.category "
+        . "ez.id_img_path, ez.p_name, ez.team_name, ez.p_member_1, ez.p_member_2, ez.p_member_3, ez.p_member_4, ez.qualifier, k.category "
         . "FROM ezexpress ez join category k on ez.category_id = k.id WHERE (p_name LIKE ?)");
 
     $stmtfind->execute([$search_like]);
@@ -187,6 +187,7 @@ $_SESSION['csrf_token'] = $csrf_token;
                                             <th>Member 2</th>
                                             <th>Member 3</th>
                                             <th>Paid Status</th>
+                                            <th>Qualification</th>
                                             <th>ID Card</th>
                                             <th>Driv Lic</th>
                                         </tr>
@@ -196,11 +197,19 @@ $_SESSION['csrf_token'] = $csrf_token;
 
             $paidplayer = $vehimgfull = $idimgfull = $shipimgfull = $drivelicimgfull = $navididimgfull = '';
             $ispaidinfo = $row['ispaid'];
+            $qualifier = $row['qualifier'];
 
             if (isset($ispaidinfo)) {
                 $paidplayer = '
                                             <div class="alert alert-primary" role="alert">
                                                 Registration Fee Is : ' . $row['ispaid'] . '
+                                                </div>
+                                            </div>';
+            }
+            if (isset($qualifier)) {
+                $paidplayer = '
+                                            <div class="alert alert-danger" role="alert">
+                                                You/Your Team Is : ' . $row['qualifier'] . '
                                                 </div>
                                             </div>';
             }
@@ -210,6 +219,7 @@ $_SESSION['csrf_token'] = $csrf_token;
             if ($row['drive_lic_path'] > 0) {
                 $drivelicimgfull = '<img width="50px" height="50px" src=images/' . $row['drive_lic_path'] . '>';
             }
+            
             echo '
                                                 
                                                     <tr>
@@ -219,6 +229,7 @@ $_SESSION['csrf_token'] = $csrf_token;
                                                         <td>' . $row['p_member_1'] . '</td>
                                                         <td>' . $row['p_member_2'] . '</td>
                                                         <td>' . $row['p_member_3'] . '</td>
+                                                        <td>' . $qualifier . '</td>
                                                         <td>' . $paidplayer . '</td>
                                                         <td><a href="images/' . $row['id_img_path'] . '" target="_blank">' . $idimgfull . '</a></td>
                                                         <td><a href="images/' . $row['drive_lic_path'] . '" target="_blank">' . $drivelicimgfull . '</a></td>
