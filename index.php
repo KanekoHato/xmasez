@@ -164,7 +164,6 @@ $_SESSION['csrf_token'] = $csrf_token;
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#eventregister">
                 Register To The Event
             </button>
-
         </div>
 
     </div>
@@ -250,9 +249,8 @@ $_SESSION['csrf_token'] = $csrf_token;
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="eventregister">Register To The Event</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <button type="button" class="btn btn-secondary"
+                        onclick="$('#eventregister').modal('hide')">Close</button>
                 </div>
                 <form action="registerevent.php" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="_csrf" value="<?= $csrf_token ?>" />
@@ -277,7 +275,7 @@ $_SESSION['csrf_token'] = $csrf_token;
                                         } else {
                                             echo '<option value="' . $row['id'] . '">' . $row['category'] . '</option>';
                                         }
-                                        
+
                                     }
                                     ?>
                                 </select>
@@ -299,10 +297,10 @@ $_SESSION['csrf_token'] = $csrf_token;
                                             class="form-select">
                                             <option value="0" disabled>Are You On Team?</option>
                                             <option value="1" selected>Yes</option>
-                                            <option value="2" >No</option>
+                                            <option value="2">No</option>
                                         </select>
                                     </div>
-                                    
+
                                     <div id="hideforrally">
                                         <label for="teamname">Team Name</label>
                                         <input placeholder="EZ Express" type="text" name="teamname"
@@ -315,49 +313,84 @@ $_SESSION['csrf_token'] = $csrf_token;
 
                                         <div id="hideforfishing">
                                             <label for="team2">Team Member 2 [Paintball]</label>
-                                            <input placeholder="Ensley Naomi" type="text" name="team2" class="form-control">
+                                            <input placeholder="Ensley Naomi" type="text" name="team2"
+                                                class="form-control">
 
                                             <label for="team3">Team Member 3 [Paintball]</label>
-                                            <input placeholder="Ensley Naoko" type="text" name="team3" class="form-control">
+                                            <input placeholder="Ensley Naoko" type="text" name="team3"
+                                                class="form-control">
                                         </div>
                                     </div>
 
-                                    
+
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-secondary"
+                                    onclick="$('#eventregister').modal('hide')">Close</button>
                                 <button type="submit" name="submit" value="Upload" class="btn btn-primary">Sent</button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                    data-target="#eventregulation">Regulation</button>
                             </div>
                 </form>
             </div>
         </div>
-        <script>
-            $(document).ready(function () {
-                $('#viewmyregdata').DataTable();
-            });
+    </div>
 
-            var coll = document.getElementsByClassName("collapsible");
-            var i;
+    <div class="modal fade" id="eventregulation" tabindex="-1" role="dialog" aria-labelledby="eventregulationlabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="eventregulation">EVENT REGULATION</h5>
+                    <button type="button" class="btn btn-secondary"
+                        onclick="$('#eventregulation').modal('hide')">Close</button>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group">
+                        <li class="list-group-item">For Fishing Participant Please Fill In Only: Your Name, ID, License,
+                            Team Name, Team Member 1 Field</li>
+                        <li class="list-group-item">For Offroad Participant Please Fill In Only: Your Name, ID, License
+                            Field</li>
+                        <li class="list-group-item">For Paintball Participant Please Fill In Only : Your Name,ID ,
+                            License, Team Name, Team Member 1,2 & 3 Field
+                        </li>
+                    </ul>
+                </div>
 
-            for (i = 0; i < coll.length; i++) {
-                coll[i].addEventListener("click", function () {
-                    this.classList.toggle("active");
-                    var content = this.nextElementSibling;
-                    if (content.style.maxHeight) {
-                        content.style.maxHeight = null;
-                    } else {
-                        content.style.maxHeight = content.scrollHeight + "px";
-                    }
-                });
-            }
-        </script>
-        <script>
-            $(document).ready(function () {
-                $('.toast').toast('show');
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        $(document).ready(function () {
+            $('#viewmyregdata').DataTable();
+        });
+
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+
+        for (i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                }
             });
-        </script>
-        <?php $_SESSION['error'] = null; ?>
+        }
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('.toast').toast('show');
+        });
+        $('#modal1').modal('hide');
+        $('#eventregulation').modal('hide');
+    </script>
+    <?php $_SESSION['error'] = null; ?>
 </body>
 
 </html>
