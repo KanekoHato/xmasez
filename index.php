@@ -207,7 +207,7 @@ $_SESSION['csrf_token'] = $csrf_token;
                                             </div>';
             }
             if (isset($qualifier)) {
-                $paidplayer = '
+                $qualifier = '
                                             <div class="alert alert-danger" role="alert">
                                                 You/Your Team Is : ' . $row['qualifier'] . '
                                                 </div>
