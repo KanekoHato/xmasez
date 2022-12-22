@@ -108,6 +108,9 @@ session_start();
                                                         <form action="ispaid.php" method="POST">
                                                             <button name="ispaidfind" class="btn btn-primary" type="submit" value="' . $row['id'] . '">PAID</button>
                                                         </form>
+                                                        <form action="removeparticipant.php" method="POST">
+                                                            <button name="ispaidfind" class="btn btn-danger" type="submit" value="' . $row['id'] . '">DELETE</button>
+                                                        </form>
                                                 </td>
                                                 </tr>
                                             ';
