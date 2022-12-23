@@ -383,11 +383,11 @@ $_SESSION['csrf_token'] = $csrf_token;
         });
 
 
-        $(document).ready(function () {
+        function imgError(image) {
             image.onerror = "";
             image.src = "../noimg.png";
             return true;
-        });
+        }
 
         var coll = document.getElementsByClassName("collapsible");
         var i;
