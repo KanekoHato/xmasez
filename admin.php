@@ -141,7 +141,7 @@ session_start();
         <script>
                 function imgError(image) {
                     image.onerror = "";
-                    image.src = "../noimage.png";
+                    image.src = "../noimg.png";
                     return true;
                 }
                 $(document).ready(function () {
