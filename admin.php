@@ -88,10 +88,10 @@ session_start();
                                 $vehimgfull = $idimgfull = $shipimgfull = $drivelicimgfull = $navididimgfull = '';
 
                                 if($row['id_img_path'] > 0){
-                                    $idimgfull = '<img width="50px" height="50px" src=images/' . $row['id_img_path'] . ' onerror="imgError(this);">';                 
+                                    $idimgfull = '<img width="50px" height="50px" src="images/' . $row['id_img_path'] . '" onerror="imgError(this);">';                 
                                 }
                                 if($row['drive_lic_path'] > 0){
-                                    $drivelicimgfull = '<img width="50px" height="50px"  src=images/' . $row['drive_lic_path'] . ' onerror="imgError(this);">';                 
+                                    $drivelicimgfull = '<img width="50px" height="50px"  src="images/' . $row['drive_lic_path'] . '" onerror="imgError(this);">';                 
                                 }
                                     echo '
                                     
