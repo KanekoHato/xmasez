@@ -1,5 +1,5 @@
 <?php
-header('Refresh: 2; URL=index.php');
+header('Refresh: 2; URL=./index.php');
 ?>
 
 <head>
