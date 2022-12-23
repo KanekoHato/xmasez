@@ -214,10 +214,10 @@ $_SESSION['csrf_token'] = $csrf_token;
                                             </div>';
             }
             if ($row['id_img_path'] > 0) {
-                $idimgfull = '<img width="50px" height="50px" src="images/' . $row['id_img_path'] . '" onError="this.onerror=null;this.src="../noimg.png";">';
+                $idimgfull = '<img width="50px" height="50px" src="images/' . $row['id_img_path'] . '" onerror="imgError(this);">';
             }
             if ($row['drive_lic_path'] > 0) {
-                $drivelicimgfull = '<img width="50px" height="50px" src="images/' . $row['drive_lic_path'] . '" onError="this.onerror=null;this.src="../noimg.png";">';
+                $drivelicimgfull = '<img width="50px" height="50px" src="images/' . $row['drive_lic_path'] . '" onerror="imgError(this);">';
             }
 
             echo '
@@ -380,6 +380,13 @@ $_SESSION['csrf_token'] = $csrf_token;
     <script>
         $(document).ready(function () {
             $('#viewmyregdata').DataTable();
+        });
+
+
+        $(document).ready(function () {
+            image.onerror = "";
+            image.src = "../noimg.png";
+            return true;
         });
 
         var coll = document.getElementsByClassName("collapsible");
