@@ -214,10 +214,10 @@ $_SESSION['csrf_token'] = $csrf_token;
                                             </div>';
             }
             if ($row['id_img_path'] > 0) {
-                $idimgfull = '<img width="50px" height="50px" src=images/' . $row['id_img_path'] . 'onerror="imgError(this);">';
+                $idimgfull = '<img width="50px" height="50px" src=images/' . $row['id_img_path'] . 'onError="this.onerror=null;this.src="../noimg.png";">';
             }
             if ($row['drive_lic_path'] > 0) {
-                $drivelicimgfull = '<img width="50px" height="50px" src=images/' . $row['drive_lic_path'] . 'onerror="imgError(this);">';
+                $drivelicimgfull = '<img width="50px" height="50px" src=images/' . $row['drive_lic_path'] . 'onError="this.onerror=null;this.src="../noimg.png";">';
             }
 
             echo '
@@ -378,12 +378,6 @@ $_SESSION['csrf_token'] = $csrf_token;
 
 
     <script>
-        function imgError(image) {
-            image.onerror = "";
-            image.src = "../noimg.png";
-            return true;
-        }
-
         $(document).ready(function () {
             $('#viewmyregdata').DataTable();
         });
