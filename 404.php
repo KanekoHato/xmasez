@@ -77,7 +77,7 @@
             document.getElementById("time").innerHTML = minutes + ":" + seconds;
             time--;
             if (time == 0) {
-                window.location.href = "./index.php";
+                window.location.href = "../index.php";
             }
         }, 1000);
     </script>
