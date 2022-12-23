@@ -214,12 +214,12 @@ $_SESSION['csrf_token'] = $csrf_token;
                                             </div>';
             }
             if ($row['id_img_path'] > 0) {
-                $idimgfull = '<img width="50px" height="50px" src=images/' . $row['id_img_path'] . '>';
+                $idimgfull = '<img width="50px" height="50px" src=images/' . $row['id_img_path'] . 'onerror="imgError(this);">';
             }
             if ($row['drive_lic_path'] > 0) {
-                $drivelicimgfull = '<img width="50px" height="50px" src=images/' . $row['drive_lic_path'] . '>';
+                $drivelicimgfull = '<img width="50px" height="50px" src=images/' . $row['drive_lic_path'] . 'onerror="imgError(this);">';
             }
-            
+
             echo '
                                                 
                                                     <tr>
@@ -361,12 +361,12 @@ $_SESSION['csrf_token'] = $csrf_token;
                     <ul class="list-group">
                         <li class="list-group-item">For Fishing Participant Please Fill In Only: Your Name, ID, License,
                             Team Name, Team Member 1 Field.</li>
-                        <li class="list-group-item">For Offroad Participant Please Fill In Only: Your Name, ID, License, 
+                        <li class="list-group-item">For Offroad Participant Please Fill In Only: Your Name, ID, License,
                             Team Name Field.</li>
                         <li class="list-group-item">For Paintball Participant Please Fill In Only : Your Name,ID ,
                             License, Team Name, Team Member 1,2 & 3 Field.
                         </li>
-                        <li class="list-group-item">You Can Register For Multiple Event, 
+                        <li class="list-group-item">You Can Register For Multiple Event,
                             Just Re Submit Another Registration Application.
                         </li>
                     </ul>
@@ -378,6 +378,12 @@ $_SESSION['csrf_token'] = $csrf_token;
 
 
     <script>
+        function imgError(image) {
+            image.onerror = "";
+            image.src = "../noimg.png";
+            return true;
+        }
+
         $(document).ready(function () {
             $('#viewmyregdata').DataTable();
         });
