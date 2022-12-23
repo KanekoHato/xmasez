@@ -369,6 +369,12 @@ $_SESSION['csrf_token'] = $csrf_token;
                         <li class="list-group-item">You Can Register For Multiple Event,
                             Just Re Submit Another Registration Application.
                         </li>
+                        <li class="list-group-item">Fishing Must Have 1 Member (1 Leader 1 Member).
+                        </li>
+                        <li class="list-group-item">Paint Ball Must Have 3 Member (1 Leader 3 Member).
+                        </li>
+                        <li class="list-group-item">Rally Is Solo , So Doesnt Need To Have A Team.
+                        </li>
                     </ul>
                 </div>
 
